@@ -35,7 +35,7 @@ CREATE TABLE `book` (
   `author` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
+INSERT INTO `book` VALUES (2,'Kiểm thử phần mềm','Công nghệ thông tin','ABC','2022-04-22',1,'K21','2021-01-01','Tin học','Dương Hữu Thành');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,6 +62,8 @@ CREATE TABLE `borrowbook` (
   `amount` int NOT NULL,
   `card_id` int NOT NULL,
   `book_id` int NOT NULL,
+  `fine` float DEFAULT '0',
+  `status` int DEFAULT '1',
   PRIMARY KEY (`borrow_id`),
   UNIQUE KEY `borrow_id_UNIQUE` (`borrow_id`),
   KEY `fk_card_borrow_idx` (`card_id`),
@@ -91,7 +94,7 @@ CREATE TABLE `card` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `activation_date` date DEFAULT NULL,
   `expiration_date` date DEFAULT NULL,
-  `total_money_penalty` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `total_money_penalty` float DEFAULT NULL,
   PRIMARY KEY (`card_id`),
   CONSTRAINT `fk_card_reader` FOREIGN KEY (`card_id`) REFERENCES `reader` (`reader_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
@@ -211,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-21 12:07:53
+-- Dump completed on 2022-04-23 20:43:29
