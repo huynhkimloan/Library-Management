@@ -40,6 +40,34 @@ public class Book {
     }
 
     
+//    public Book(String book_name, String description, String publishing_company, Date publishing_year, String category, String author) {
+//        this.book_name = book_name;
+//        this.description = description;
+//        this.publishing_company = publishing_company;
+//        this.publishing_year = publishing_year;
+//        this.category = category;
+//        this.author = author;
+//    }
+    
+    
+    public Book(String book_name, String category, String author, String description, String publishing_company, Date publishing_year) {
+       
+        this.book_name = book_name;
+        this.category = category;
+        this.author = author;
+        this.description = description;
+        this.publishing_company = publishing_company;
+        this.publishing_year = publishing_year;
+        
+        
+    }
+
+    @Override
+    public String toString() {
+        return this.publishing_company;
+    }
+    
+    
     
             
     /**
