@@ -39,10 +39,11 @@ public class ReaderServices {
     
 
     //kiểm tra đăng nhập bằng tênđn + mk
-    public boolean KiemTraDangNhap(String r_name, String r_pass) throws SQLException {
+    public boolean KiemTraDangNhapADMIN(String r_name, String r_pass) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()){
-            PreparedStatement stm = conn.prepareStatement("SELECT password FROM reader WHERE username = ?");
+            PreparedStatement stm = conn.prepareStatement("SELECT password FROM reader WHERE username = ? AND user_role = ?");
             stm.setString(1, r_name);
+            stm.setString(2, "ADMIN");
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
                 String pass = rs.getString("password");
@@ -53,6 +54,20 @@ public class ReaderServices {
         }
     }
     
+    public boolean KiemTraDangNhapUSER(String r_name, String r_pass) throws SQLException {
+        try(Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement("SELECT password FROM reader WHERE username = ? AND user_role = ?");
+            stm.setString(1, r_name);
+            stm.setString(2, "USER");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                String pass = rs.getString("password");
+                if (r_pass.equals(pass)== true)
+                    return true;
+            }
+            return false;
+        }
+    }
     
     //lấy mã độc giả
     public int getReaderID(String username) throws SQLException{
@@ -108,19 +123,48 @@ public class ReaderServices {
     }
  
     //kiểm tra mật khẩu trên 6 ký tự
-    public static boolean checkPass_less6character(String p){
+    public boolean checkPass_less6character(String p){
         if (p.length() < 6)
             return true;
         return false;
     }
     
-    //kiểm tra mật khẩu chứa ký tự đặc biệt
+    //kiểm tra mật khẩu chứa ký tự đặc biệt [!@#$%&*()_+=|<>?{}\\[\\]~-]
+//    public static boolean SpecialChar(String s){
+//        for(int i = 0; i < s.length(); i++)
+//        {
+//          
+//        }
+//        return true;
+//    }    
     //
     
     //kiểm tra mật khẩu giống nhau
-    public static boolean checkPass_Similar( String p1, String p2){
+    public boolean checkPass_Similar(String p1, String p2){
         if (p1.equals(p2) == false)
                 return false;
         return true;
     }
+    
+    //mật khảu phải chứa chữ hoa, chữ thường & số
+     public static String checkPassword(String str){
+        int upper = 0, lower = 0, number = 0, special = 0;
+
+            for(int i = 0; i < str.length(); i++)
+            {
+                char ch = str.charAt(i);
+                if (ch >= 'A' && ch <= 'Z')
+                    upper++;
+                else if (ch >= 'a' && ch <= 'z')
+                    lower++;
+                else if (ch >= '0' && ch <= '9')
+                    number++;
+                else
+                    special++;
+            }
+        if (upper == 0 || number == 0 || lower == 0)
+            return "Mật khẩu phải bao gồm chữ hoa, chữ thường và số";
+        return "";        
+    }
+   
 }

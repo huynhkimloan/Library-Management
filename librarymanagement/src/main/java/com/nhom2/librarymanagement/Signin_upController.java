@@ -70,32 +70,38 @@ public class Signin_upController implements Initializable {
     
     
      
-     
+    String role;
     @FXML
     public void btnSignIn(ActionEvent event) throws SQLException, IOException {
-        
-        String role = this.user_role.getValue();   
+        role = this.user_role.getValue();   
         String user = this.username.getText();
         String pass = this.password.getText();
         
-        if (user.equals("") && pass.equals("")) {
+        if (this.user_role.getValue().equals("")) {
+            AlertUtils.showAlert("Chọn đối tượng đăng nhập!", Alert.AlertType.WARNING);
+            role = null;
+        }
+        else if (user.equals("") && pass.equals("")) {
             AlertUtils.showAlert("Phải nhập tài khoản và mật khẩu!", Alert.AlertType.WARNING);
             this.username.setStyle("-fx-border-color: gold;");
             this.password.setStyle("-fx-border-color: gold;");
+            role = null;
         }
         else if (user.equals("")) {
             AlertUtils.showAlert("Phải nhập tài khoản!", Alert.AlertType.WARNING);
             this.username.setStyle("-fx-border-color: gold;");
             this.password.setStyle("-fx-border-color: none;");
+            role = null;
         }
         else if (pass.equals("")) {
             AlertUtils.showAlert("Phải nhập mật khẩu!", Alert.AlertType.WARNING);
             this.username.setStyle("-fx-border-color: none;");
             this.password.setStyle("-fx-border-color: gold;");
+            role = null; 
         }
         else if (role.equals("USER")) {   
             ReaderServices rd = new ReaderServices();
-            boolean kt = rd.KiemTraDangNhap(user, pass);
+            boolean kt = rd.KiemTraDangNhapUSER(user, pass);
             if (kt){
 //                readerID = rd.getReaderID(this.username.getText());
 //                adminID = 0;
@@ -110,11 +116,12 @@ public class Signin_upController implements Initializable {
                 AlertUtils.showAlert("Tên tài khoản hoặc mật khẩu không chính xác!", Alert.AlertType.ERROR);
                 this.username.setStyle("-fx-border-color: red;");
                 this.password.setStyle("-fx-border-color: red;");
+                role = "";
             }
         }
-        else {
+        else if (role.equals("ADMIN")){
             ReaderServices rd = new ReaderServices();
-            boolean kt = rd.KiemTraDangNhap(user, pass);
+            boolean kt = rd.KiemTraDangNhapADMIN(user, pass);
             if (kt){
 //                readerID = rd.getReaderID(this.username.getText());
 //                adminID = 0;
@@ -129,6 +136,7 @@ public class Signin_upController implements Initializable {
                 AlertUtils.showAlert("Tên tài khoản hoặc mật khẩu không chính xác!", Alert.AlertType.ERROR);
                 this.username.setStyle("-fx-border-color: red;");
                 this.password.setStyle("-fx-border-color: red;");
+                role = "";
             }
         }
     }

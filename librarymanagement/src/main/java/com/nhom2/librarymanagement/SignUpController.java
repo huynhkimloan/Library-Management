@@ -52,6 +52,7 @@ public class SignUpController implements Initializable {
     @FXML private TextField username;
     @FXML private TextField pass;
     @FXML private TextField pass2;
+     
     
     /**
      * Initializes the controller class.
@@ -84,6 +85,45 @@ public class SignUpController implements Initializable {
 //        this.sex.setValue("Nam");
     }
     
+//    public static void init_Null(TextField name, DatePicker day, TextField email, TextField phone, 
+//             TextField add, TextField username, TextField pass1, TextField pass2){
+//        name.setText(null);
+//        email.setText(null);
+//        phone.setText(null);
+//        add.setText(null);
+//        username.setText(null);
+//        pass1.setText(null);
+//        pass2.setText(null);
+//    }
+    
+    public static void init_Null(String name, String email, String phone, 
+             String add, String username, String pass1, String pass2){
+        name = null;
+        email = null;
+        phone = null;
+        add = null;
+        username = null;
+        pass1 = null;
+        pass2 = null;
+//        day = null;
+    }
+    
+//    public static void init_Null2(TextField name, TextField email, TextField phone, 
+//             TextField add, TextField username, TextField pass1, TextField pass2){
+//        name = null;
+//        email = null;
+//        phone = null;
+//        add = null;
+//        username = null;
+//        pass1 = null;
+//        pass2 = null;
+////        day = null;
+////        obj.setValue(null);
+////        sex.setValue(null);
+////        d.setValue(null);
+//    }
+    
+    String r_email, r_add, r_phone, r_username, r_pass, r_pass2, r_name;
     public void btnSignUp(ActionEvent event) throws ParseException, SQLException, IOException {
         try{
             //object
@@ -91,7 +131,7 @@ public class SignUpController implements Initializable {
             DepartmentServices d = new DepartmentServices();
             int r_dedepartment = d.getDepartmentID(department.getValue().toString());
             //name
-            String r_name = Utils.remove_Whitespace(this.name.getText());
+            r_name = Utils.remove_Whitespace(this.name.getText());
             //birthday
             String r_date_of_birth = this.date_of_birth.getValue().toString();
             DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -99,30 +139,52 @@ public class SignUpController implements Initializable {
             java.sql.Date birthdate = new java.sql.Date(day.getTime());
             //sex
             //email
-            String r_email = this.email.getText();
+            r_email = this.email.getText();
             //phone
-            String r_phone = this.phone.getText();
+            r_phone = this.phone.getText();
             //address
-            String r_add = Utils.remove_Whitespace(this.address.getText());
+            r_add = Utils.remove_Whitespace(this.address.getText());
             //username
-            String r_username = this.username.getText();
+            r_username = this.username.getText();
             //password
-            String r_pass = this.pass.getText();
-            String r_pass2 = this.pass2.getText();
+            r_pass = this.pass.getText();
+            r_pass2 = this.pass2.getText();
                   
             ReaderServices rd = new ReaderServices(); 
-            if (rd.username_exists(r_username))
-                AlertUtils.showAlert("Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
+            
+            if (r_name.equals("")|| r_pass.equals("") || r_pass2.equals("") ||
+                    r_username.equals("") || r_email.equals("") || r_phone.equals("") ||
+                    r_add.equals("") || r_date_of_birth.equals("") || object.getValue().equals("") ||
+                    department.getValue().equals("") || sex.getValue().equals(""))
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
+                AlertUtils.showAlert("Phải nhập đầy đủ các trường dữ liệu!", Alert.AlertType.ERROR);
+            }
+           
             else if (rd.checkPass_less6character(r_pass))
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
                 AlertUtils.showAlert("Mật khẩu phải trên 6 ký tự!", Alert.AlertType.ERROR);
+            }
             else if (rd.checkPass_Similar(r_pass, r_pass2)==false)
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
                 AlertUtils.showAlert("Mật khẩu xác nhận không chính xác!", Alert.AlertType.ERROR);
+            }
+            else if (rd.username_exists(r_username))
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
+                AlertUtils.showAlert("Tên đăng nhập đã tồn tại!", Alert.AlertType.ERROR);
+            }
             else {
                 Reader reader = new Reader(r_name, r_username, r_pass, 
                         r_email, true, r_dedepartment, sex.getValue(), 
                         r_phone, r_add, object.getValue(), "USER", birthdate); 
                 rd.SignUp_Account(reader);
                 AlertUtils.showAlert("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION);
+//                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
+//                SignUpController.init_Null2(name, email, phone, address, username, pass, pass2);
+                //chuyển scene
                 Parent root = FXMLLoader.load(getClass().getResource("Signin_up.fxml"));
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
