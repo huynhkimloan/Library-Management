@@ -9,17 +9,12 @@ and open the template in the editor.
 */
 
 /*Management*/
-.Management, .ManagementBook {
+.ManagementBook, .ManagementReader {
     -fx-background-color: lightgreen;
     -fx-family: Tahoma;
     -fx-alignment: CENTER;
     -fx-padding: 10;
     -fx-spacing: 10;
-}
-
-Button.btn-management {
-    -fx-font-size: 24;
-    -fx-pref-width: 400;
 }
 
 /*ManagementBook*/
@@ -51,4 +46,25 @@ Text.title-managementbook {
 
 Lable.lbMess {
     -fx-fill: red;
+}
+
+/*ManagementReader*/
+.ManagementReader Text, TextField, ComboBox, DatePicker {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 15;
+}
+
+Text.title-managementreader {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-fill: lightgreen;
+    -fx-stroke-width: 3;
+    -fx-stroke: green;
+}
+
+.txt-managementreader {
+    -fx-pref-width: 500;
+   
 }

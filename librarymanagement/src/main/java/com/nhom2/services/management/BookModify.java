@@ -23,8 +23,6 @@ public class BookModify {
     public List<Book> getBook(String book_name) throws SQLException {
         List<Book> books = new ArrayList<>();
         try (Connection conn = JdbcUtils.getConn()) {
-//            Statement stm = conn.createStatement();
-//            ResultSet rs = stm.executeQuery("SELECT * FROM book");
             String sql = "SELECT * FROM book";
             if (book_name != null && !book_name.isEmpty())
                 sql += " WHERE book_name like concat('%', ?, '%')";
@@ -53,17 +51,18 @@ public class BookModify {
     
     public void AddBook(Book b) throws SQLException{        
         try(Connection conn = JdbcUtils.getConn()){
-            String sql = "INSERT INTO book (book_name, description, category, author, publishing_company, publishing_year, import_date, location)"
+            String sql = "INSERT INTO book (book_name, description, publishing_company, import_date, location, publishing_year, category, author)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, b.getBook_name());
             stm.setString(2, b.getDescription());
-            stm.setString(3, b.getCategory());
-            stm.setString(4, b.getAuthor());
-            stm.setString(5, b.getPublishing_company());
-            stm.setDate(6, (Date) b.getPublishing_year());
-            stm.setDate(7, (Date) b.getImport_date());
-            stm.setString(8, b.getLocation());
+            stm.setString(3, b.getPublishing_company());
+            stm.setString(4, b.getImport_date());
+            stm.setString(5, b.getLocation());
+            stm.setString(6, b.getPublishing_year());
+            stm.setString(7, b.getCategory());
+            stm.setString(8, b.getAuthor());
+            
             stm.executeUpdate();
         }
     }
@@ -75,15 +74,16 @@ public class BookModify {
                     + " location =?, publishing_year = ?, category = ?, author = ?"
                     + " WHERE (book_id = ?);";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, book_id);
-            stm.setString(2, book_name);
-            stm.setString(3, description);
-            stm.setString(4, publishing_company);
-            stm.setDate(5, import_date);
-            stm.setString(6, location);
-            stm.setDate(7, publishing_year);
-            stm.setString(8, category);
-            stm.setString(9, author);
+            
+            stm.setString(1, book_name);
+            stm.setString(2, description);
+            stm.setString(3, publishing_company);
+            stm.setDate(4, import_date);
+            stm.setString(5, location);
+            stm.setDate(6, publishing_year);
+            stm.setString(7, category);
+            stm.setString(8, author);
+            stm.setInt(9, book_id);
             
             stm.executeUpdate();
         }
@@ -97,5 +97,6 @@ public class BookModify {
             stm.executeUpdate();
         }
     }
+    
 
 }

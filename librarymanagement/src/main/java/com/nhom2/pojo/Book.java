@@ -5,6 +5,7 @@
  */
 package com.nhom2.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -41,6 +42,17 @@ public class Book {
         this.author = author;      
     }
 
+    public Book(String book_name, String description, String publishing_company, Date import_date, String location, Date publishing_year, String category, String author) {
+        this.book_name = book_name;
+        this.description = description;  
+        this.publishing_company = publishing_company;
+        this.import_date = import_date;
+        this.location = location;
+        this.publishing_year = publishing_year;
+        this.category = category;
+        this.author = author;
+    }
+
     /**
      * @return the book_id
      */
@@ -59,7 +71,7 @@ public class Book {
      * @return the active
      */
     public boolean isActive() {
-        return active;
+        return active=true;
     }
 
     /**
@@ -100,8 +112,9 @@ public class Book {
     /**
      * @return the import_date
      */
-    public Date getImport_date() {
-        return import_date;
+    public String getImport_date() {
+        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
+        return f.format(import_date);
     }
 
     /**
@@ -128,8 +141,9 @@ public class Book {
     /**
      * @return the publishing_year
      */
-    public Date getPublishing_year() {
-        return publishing_year;
+    public String getPublishing_year() {
+        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
+        return f.format(publishing_year);
     }
 
     /**

@@ -10,7 +10,10 @@ import com.nhom2.services.management.BookModify;
 import com.nhom2.utils.Utils;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -132,73 +135,99 @@ public class ManagementBookController implements Initializable {
             txtCategory.setText(b.getCategory());
             txtAuthor.setText(b.getAuthor());
             txtPublishingCompany.setText(b.getPublishing_company());
-//            dtpPublishingYear.setValue(LocalDate.of(Integer.parseInt(b.getPublishing_year().substring(6, 10),
-//                    Integer.parseInt(b.getPublishing_year().substring(3, 5)),
-//                    Integer.parseInt(b.getPublishing_year().substring(0, 2)))));
-            dtpImportDate.setValue(LocalDate.now());
+            dtpPublishingYear.setValue(LocalDate.of(Integer.parseInt((b.getPublishing_year().substring(6, 10))),
+                    Integer.parseInt(b.getPublishing_year().substring(3, 5)),
+                    Integer.parseInt(b.getPublishing_year().substring(0, 2))));
+
+            dtpImportDate.setValue(LocalDate.of(Integer.parseInt((b.getImport_date().substring(6, 10))),
+                    Integer.parseInt(b.getImport_date().substring(3, 5)),
+                    Integer.parseInt(b.getImport_date().substring(0, 2))));
+            
             txtLocation.setText(b.getLocation());
         }
     }
     
-    public void addHandler(ActionEvent event) throws SQLException {
-//        try{
-//            String book_name = Utils.removeWhitespace(this.txtBookName.getText());
-//            String description = Utils.removeWhitespace(this.txtDescription.getText());
-//            String category = Utils.removeWhitespace(this.txtCategory.getText());
-//            String author = Utils.removeWhitespace(this.txtAuthor.getText());
-//            String publishing_company = Utils.removeWhitespace(this.txtPublishingCompany.getText());
-//            LocalDate publishing_year = this.dtpPublishingYear.getValue();
-//            LocalDate import_date = this.dtpImportDate.getValue();
-//            String location = Utils.removeWhitespace(this.txtLocation.getText());
-//            if (book_name == null || book_name.equals(""))
-//                lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
-//            else if (category == null || category.equals(""))
-//                lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
-//            else if (author == null || author.equals(""))
-//                lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
-//            else 
-//                Book b = new Book(book_name, description, category, author, publishing_company, publishing_year, import_date, location);
-//                BookModify bm = new BookModify();
-//                bm.AddBook(b);
-//                loadTableData(null);
-//        }catch (NumberFormatException ex2){
-//                lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
-//        }
+    public void addHandler(ActionEvent event) throws SQLException, ParseException {
+        try{
+            SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
+            
+            String book_name = Utils.removeWhitespace(this.txtBookName.getText());
+            String description = Utils.removeWhitespace(this.txtDescription.getText());
+            String publishing_company = Utils.removeWhitespace(this.txtPublishingCompany.getText());
+            
+            String ngay1 = this.dtpPublishingYear.getValue().toString();
+            Date ngayXB = f.parse(ngay1);
+            java.sql.Date publishing_year = new java.sql.Date(ngayXB.getTime());
+            
+            String ngay2 = this.dtpImportDate.getValue().toString();
+            Date ngayNhap = f.parse(ngay2);
+            java.sql.Date import_date = new java.sql.Date(ngayNhap.getTime());
+            
+            String location = Utils.removeWhitespace(this.txtLocation.getText());
+            String category = Utils.removeWhitespace(this.txtCategory.getText());
+            String author = Utils.removeWhitespace(this.txtAuthor.getText());
+            
+            if (book_name == null || book_name.equals(""))
+                lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
+            else if (category == null || category.equals(""))
+                lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
+            else if (author == null || author.equals(""))
+                lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
+            else {
+                Book b = new Book(book_name, description, publishing_company, import_date, location, publishing_year, category, author);
+                BookModify bm = new BookModify();
+                bm.AddBook(b);
+                loadTableData(null);
+                Utils.getBox("Thêm thành công", Alert.AlertType.INFORMATION).show();
+                resetBook();
+            }
+        }catch (NumberFormatException ex2){
+                lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
+        }
    }
     
-    public void editHandler(ActionEvent event) throws SQLException {
-//        Book b = this.tbBooks.getSelectionModel().getSelectedItem();
-//        if (b != null){
-//            try{
-//                int book_id = b.getBook_id();
-//                String book_name = Utils.removeWhitespace(this.txtBookName.getText());
-//                String description = Utils.removeWhitespace(this.txtDescription.getText());
-//                String category = Utils.removeWhitespace(this.txtCategory.getText());
-//                String author = Utils.removeWhitespace(this.txtAuthor.getText());
-//                String publishing_company = Utils.removeWhitespace(this.txtPublishingCompany.getText());
-//                LocalDate publishing_year = this.dtpPublishingYear.getValue();
-//                LocalDate import_date = this.dtpImportDate.getValue();
-//                String location = Utils.removeWhitespace(this.txtLocation.getText());
-//
-//                if (book_name == null || book_name.equals(""))
-//                    lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
-//                else if (category == null || category.equals(""))
-//                    lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
-//                else if (author == null || author.equals(""))
-//                    lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
-//                else {
-//                    BookModify bm = new BookModify();
-//                    bm.UpdateBook(book_id, book_name, description, publishing_company, import_date, location, publishing_year, category, author);
-//                    loadTableData(null);      
-//                    Utils.getBox("Sửa thành công", Alert.AlertType.INFORMATION).show();
-//                    resetBook();
-//                }
-//            }catch (NumberFormatException ex2){
-//                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
-//            }
-//        }
-//        else
-//            lbMess.setText("Chưa chọn đối tượng để sửa");
+    public void editHandler(ActionEvent event) throws SQLException, ParseException {
+        Book b = this.tbBooks.getSelectionModel().getSelectedItem();
+        if (b != null){
+            try{
+                SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
+                
+                int book_id = b.getBook_id();
+                String book_name = Utils.removeWhitespace(this.txtBookName.getText());
+                String description = Utils.removeWhitespace(this.txtDescription.getText());
+                String category = Utils.removeWhitespace(this.txtCategory.getText());
+                String author = Utils.removeWhitespace(this.txtAuthor.getText());
+                String publishing_company = Utils.removeWhitespace(this.txtPublishingCompany.getText());
+                
+                String ngay1 = this.dtpPublishingYear.getValue().toString();
+                Date ngayXB = f.parse(ngay1);
+                java.sql.Date publishing_year = new java.sql.Date(ngayXB.getTime());
+            
+                String ngay2 = this.dtpImportDate.getValue().toString();
+                Date ngayNhap = f.parse(ngay2);
+                java.sql.Date import_date = new java.sql.Date(ngayNhap.getTime());
+                
+                String location = Utils.removeWhitespace(this.txtLocation.getText());
+
+                if (book_name == null || book_name.equals(""))
+                    lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
+                else if (category == null || category.equals(""))
+                    lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
+                else if (author == null || author.equals(""))
+                    lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
+                else {
+                    BookModify bm = new BookModify();
+                    bm.UpdateBook(book_id, book_name, description, publishing_company, import_date, location, publishing_year, category, author);
+                    loadTableData(null);      
+                    Utils.getBox("Sửa thành công", Alert.AlertType.INFORMATION).show();
+                    resetBook();
+                }
+            }catch (NumberFormatException ex2){
+                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
+            }
+        }
+        else
+            lbMess.setText("Chưa chọn đối tượng để sửa");
     }
     
     public void deleteHandler(ActionEvent event) throws SQLException {
@@ -227,4 +256,6 @@ public class ManagementBookController implements Initializable {
         this.dtpImportDate.setValue(LocalDate.now());
         this.txtLocation.setText("");
     }
+    
+
 }

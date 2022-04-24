@@ -18,7 +18,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-managementbook" text="Quản lý Sách" wrappingWidth="218.197265625" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <VBox prefHeight="538.0" prefWidth="926.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="538.0" prefWidth="926.0" styleClass="ManagementBook" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="43.0" prefWidth="786.0" styleClass="hbox-manabook">
                <children>
@@ -98,6 +98,7 @@
             <Button mnemonicParsing="false" onAction="#editHandler" styleClass="btn-managementbook" text="SỬA" />
             <Button mnemonicParsing="false" onAction="#deleteHandler" styleClass="btn-managementbook" text="XÓA" />
             <Button layoutX="98.0" layoutY="198.0" mnemonicParsing="false" onAction="#resetHandler" styleClass="btn-managementbook" text="THIẾT LẬP LẠI" />
+            <Button layoutX="73.0" layoutY="385.0" mnemonicParsing="false" styleClass="btn-managementbook" text="QUAY LẠI" />
          </children>
       </VBox>
    </right>

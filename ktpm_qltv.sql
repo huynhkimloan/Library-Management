@@ -28,14 +28,14 @@ CREATE TABLE `book` (
   `description` mediumtext COLLATE utf8_unicode_ci,
   `publishing_company` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `import_date` date DEFAULT NULL,
-  `active` tinyint(1) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
   `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publishing_year` date NOT NULL,
   `category` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `author` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`book_id`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (2,'Kiểm thử phần mềm','Công nghệ thông tin','ABC','2022-04-22',1,'K21','2021-01-01','Tin học','Dương Hữu Thành');
+INSERT INTO `book` VALUES (2,'Kiểm thử phần mềm','Công nghệ thông tin','ABC','2022-04-22',1,'K21','2021-01-01','Tin học','Dương Hữu Thành'),(4,'An toàn hệ thống thông tin','An toàn hệ thống thông tin','Đại học Mở','2013-10-27',1,'K23','2011-10-20','Tin học','def'),(5,'Pháp luật Đại cương','Pháp luật Đại cương - Đại học Mở TP.HCM','Hồng Đức','2013-10-26',1,'K11','2012-12-29','Pháp luật','Bùi Ngọc Tuyền'),(6,'Cơ sở dữ liệu','Cơ sở dữ liệu (nhập môn)','XYZ','0035-04-05',1,'K22','0019-04-03','Tin học','Đại học mở'),(7,'Nhập môn tin học','Nhập môn tin học','XYZ','2013-10-29',1,'K24','2011-10-22','Tin học','ABC');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,6 +106,7 @@ CREATE TABLE `card` (
 
 LOCK TABLES `card` WRITE;
 /*!40000 ALTER TABLE `card` DISABLE KEYS */;
+INSERT INTO `card` VALUES (1,1,'2022-04-24','2023-04-24',0),(2,1,'2022-04-19','2023-04-19',0);
 /*!40000 ALTER TABLE `card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +122,7 @@ CREATE TABLE `department` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`department_id`),
   UNIQUE KEY `department_id_UNIQUE` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +131,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'CNTT');
+INSERT INTO `department` VALUES (1,'Công nghệ thông tin'),(2,'Đông Nam Á Học'),(3,'Ngôn ngữ Anh'),(4,'Luật'),(5,'Công nghệ sinh học'),(6,'Đào tạo đặc biệt');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +146,7 @@ CREATE TABLE `reader` (
   `reader_id` int NOT NULL AUTO_INCREMENT,
   `reader_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL DEFAULT '123456',
   `sex` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -153,14 +154,14 @@ CREATE TABLE `reader` (
   `phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `object` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
-  `user_role` enum('ADMIN','USER') COLLATE utf8_unicode_ci NOT NULL,
+  `user_role` enum('ADMIN','USER') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'USER',
   `department_id` int NOT NULL,
   PRIMARY KEY (`reader_id`),
   UNIQUE KEY `reader_id_UNIQUE` (`reader_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_department_reader_idx` (`department_id`),
   CONSTRAINT `fk_department_reader` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +170,7 @@ CREATE TABLE `reader` (
 
 LOCK TABLES `reader` WRITE;
 /*!40000 ALTER TABLE `reader` DISABLE KEYS */;
-INSERT INTO `reader` VALUES (1,'Nguyễn Thị Thúy Ngân','admin','123','female','2001-07-21','195105002129ngan@ou.edu.vn','Bến Tre','0877900625','Sinh viên',1,'ADMIN',1);
+INSERT INTO `reader` VALUES (1,'Nguyễn Thị Thúy Ngân','admin','123','female','2001-07-21','195105002129ngan@ou.edu.vn','Bến Tre','0877900625','Sinh viên',1,'ADMIN',1),(2,'Phan Thị Diệu Hiền','hien01','123','female','2001-07-12','1951052049hien@ou.edu.vn','Bình Định','0297548975','Sinh Viên',1,'USER',4);
 /*!40000 ALTER TABLE `reader` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-23 20:43:29
+-- Dump completed on 2022-04-24 22:26:25
