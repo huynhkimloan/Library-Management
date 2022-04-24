@@ -6,6 +6,7 @@
 package com.nhom2.pojo;
 
 import java.util.Date;
+import javafx.scene.control.CheckBox;
 
 /**
  *
@@ -22,7 +23,8 @@ public class Book {
     private Date publishing_year;
     private String category;
     private String author;
-
+    private CheckBox select;
+    
     public Book() {
     }
 
@@ -58,16 +60,14 @@ public class Book {
         this.description = description;
         this.publishing_company = publishing_company;
         this.publishing_year = publishing_year;
-        
-        
+        this.select = new CheckBox();
+        this.select.setDisable(true);
     }
 
     @Override
     public String toString() {
         return this.publishing_company;
     }
-    
-    
     
             
     /**
@@ -208,6 +208,20 @@ public class Book {
      */
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    /**
+     * @return the select
+     */
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    /**
+     * @param select the select to set
+     */
+    public void setSelect(CheckBox select) {
+        this.select = select;
     }
     
     
