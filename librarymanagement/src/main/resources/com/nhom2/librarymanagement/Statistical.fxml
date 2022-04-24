@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="Statistical" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.StatisticalController">
+   <children>
+      <Text cache="true" cacheHint="QUALITY" disable="true" fill="#fce725" focusTraversable="true" lineSpacing="12.0" stroke="#110eb7" strokeDashOffset="26.0" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeMiterLimit="36.0" strokeType="OUTSIDE" strokeWidth="2.0" styleClass="title" text="THỐNG KÊ BÁO CÁO TÌNH HÌNH MƯỢN TRẢ SÁCH " textAlignment="CENTER" wrappingWidth="621.4666900634766">
+         <font>
+            <Font size="26.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="CROSSHAIR" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="-1.0" contrast="-0.07" hue="1.0" saturation="-0.32" />
+         </effect>
+      </Text>
+      <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="475.0">
+         <children>
+            <TextField fx:id="tfNam" alignment="BASELINE_RIGHT" prefHeight="33.0" prefWidth="167.0" promptText="Nhập Năm..." styleClass="NhapNam">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+         </children>
+      </HBox>
+      <HBox prefHeight="134.0" prefWidth="960.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#banDocChuaTraSachHandler" prefHeight="34.0" prefWidth="189.0" styleClass="chuaTraSach" text="Bạn Đọc Chưa Trả Sách" />
+            <TableView fx:id="tbChuaTraSach" prefHeight="100.0" prefWidth="752.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="33.0" prefWidth="904.0" styleClass="HBBorrow">
+         <children>
+            <Button mnemonicParsing="false" onAction="#muonSachTheoNamHandler" prefHeight="36.0" prefWidth="178.0" styleClass="Borrow" text="Mượn Sách Theo Năm" />
+            <Button mnemonicParsing="false" onAction="#muonSachTheoQuy1Handler" prefHeight="38.0" prefWidth="184.0" styleClass="Borrow" text="Mượn  Sách Theo Qúy 1" />
+            <Button mnemonicParsing="false" onAction="#muonSachTheoQuy2Handler" prefHeight="34.0" prefWidth="181.0" styleClass="Borrow" text="Mượn  Sách Theo Qúy 2" />
+            <Button mnemonicParsing="false" onAction="#muonSachTheoQuy3Handler" prefHeight="33.0" prefWidth="184.0" styleClass="Borrow" text="Mượn  Sách Theo Qúy 3" />
+            <Button mnemonicParsing="false" onAction="#muonSachTheoQuy4Handler" prefHeight="34.0" prefWidth="177.0" styleClass="Borrow" text="Mượn  Sách Theo Qúy 4" />
+         </children>
+      </HBox>
+      <Label fx:id="lbBorrow" disable="true" graphicTextGap="7.0" lineSpacing="2.0" prefHeight="99.0" prefWidth="932.0" styleClass="lbBorrow" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="33.0" prefWidth="904.0" styleClass="HBPay">
+         <children>
+            <Button mnemonicParsing="false" onAction="#traSachTheoNamHandler" prefHeight="34.0" prefWidth="179.0" styleClass="pay" text="Trả Sách Theo Năm" />
+            <Button mnemonicParsing="false" onAction="#traSachTheoQuy1Handler" prefHeight="46.0" prefWidth="189.0" styleClass="pay" text="Trả  Sách Theo Qúy 1" />
+            <Button mnemonicParsing="false" onAction="#traSachTheoQuy2Handler" prefHeight="46.0" prefWidth="189.0" styleClass="pay" text="Trả  Sách Theo Qúy 2" />
+            <Button mnemonicParsing="false" onAction="#traSachTheoQuy3Handler" prefHeight="46.0" prefWidth="189.0" styleClass="pay" text="Trả  Sách Theo Qúy 3" />
+            <Button mnemonicParsing="false" onAction="#traSachTheoQuy4Handler" prefHeight="35.0" prefWidth="155.0" styleClass="pay" text="Trả  Sách Theo Qúy 4" />
+         </children>
+      </HBox>
+      <Label fx:id="lbPay" disable="true" graphicTextGap="7.0" layoutX="30.0" layoutY="331.0" lineSpacing="2.0" prefHeight="99.0" prefWidth="932.0" styleClass="lbBorrow" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#reset1Handler" prefWidth="90.0" styleClass="ReSetBP" text="RESET" textAlignment="CENTER" textFill="#5212cc" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>
