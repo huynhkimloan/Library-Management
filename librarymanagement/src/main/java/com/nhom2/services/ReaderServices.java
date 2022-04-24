@@ -22,23 +22,8 @@ import javafx.scene.control.TextField;
  * @author ASUS
  */
 public class ReaderServices {
-//    public List<Reader> getReader() throws SQLException{
-//        List<Reader> results = new ArrayList<>();
-//        try(Connection conn = JdbcUtils.getConn()) {
-//            Statement stm = conn.createStatement();
-//            ResultSet rs = stm.executeQuery("SELECT * FROM reader");
-//            
-//            while (rs.next()) {
-//                Reader r  = new Reader(rs.getInt("reader_id"), rs.getString("reader_name"));
-//                
-//                results.add(r); 
-//            }
-//        }
-//        return results;
-//    }
-    
 
-    //kiểm tra đăng nhập bằng tênđn + mk
+    //kiểm tra đăng nhập của admin bằng tênđn + mk
     public boolean KiemTraDangNhapADMIN(String r_name, String r_pass) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT password FROM reader WHERE username = ? AND user_role = ?");
@@ -54,6 +39,8 @@ public class ReaderServices {
         }
     }
     
+    
+    //kiểm tra đăng nhập của user
     public boolean KiemTraDangNhapUSER(String r_name, String r_pass) throws SQLException {
         try(Connection conn = JdbcUtils.getConn()){
             PreparedStatement stm = conn.prepareStatement("SELECT password FROM reader WHERE username = ? AND user_role = ?");
@@ -69,7 +56,8 @@ public class ReaderServices {
         }
     }
     
-    //lấy mã độc giả
+    
+    //lấy mã độc giả *
     public int getReaderID(String username) throws SQLException{
         int rID = 0;
         try(Connection conn = JdbcUtils.getConn()){
@@ -82,6 +70,7 @@ public class ReaderServices {
             return rID;
         }
     }
+    
     
     //kiểm tra tên đã tồn tại
     public boolean username_exists(String u_name) throws SQLException{
@@ -122,7 +111,16 @@ public class ReaderServices {
         }
     }
  
-    //kiểm tra mật khẩu trên 6 ký tự
+    
+    //kiểm tra số điện thoại hợp lệ
+    public boolean check_PhoneNumber(String p) {
+        if (p.length() != 10)
+            return false;
+        return true;
+    }
+  
+    
+    //kiểm tra mật khẩu dưới 6 ký tự
     public boolean checkPass_less6character(String p){
         if (p.length() < 6)
             return true;

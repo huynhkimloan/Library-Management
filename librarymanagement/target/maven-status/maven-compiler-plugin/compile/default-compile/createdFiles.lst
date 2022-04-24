@@ -15,6 +15,7 @@ com\nhom2\services\Payment.class
 com\nhom2\pojo\Book.class
 com\nhom2\pojo\BorrowBook.class
 com\nhom2\pojo\Department.class
+com\nhom2\utils\EmailFormatUtils.class
 com\nhom2\pojo\ReserveBook.class
 com\nhom2\utils\AlertUtils.class
 com\nhom2\librarymanagement\Signin_upController.class

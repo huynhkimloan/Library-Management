@@ -35,21 +35,7 @@ public class DepartmentServices {
         }
         return results;
     }
-    
-    //    public List<Reader> getReader() throws SQLException{
-//        List<Reader> results = new ArrayList<>();
-//        try(Connection conn = JdbcUtils.getConn()) {
-//            Statement stm = conn.createStatement();
-//            ResultSet rs = stm.executeQuery("SELECT * FROM reader");
-//            
-//            while (rs.next()) {
-//                Reader r  = new Reader(rs.getInt("reader_id"), rs.getString("reader_name"));
-//                
-//                results.add(r); 
-//            }
-//        }
-//        return results;
-//    }
+
     
     //lấy mã khoa
     public int getDepartmentID(String d_name) throws SQLException{

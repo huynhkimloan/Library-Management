@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -121,6 +122,13 @@ public class BookService {
         return results;
     }
     
+    
+    //xoá giá trị của ô text
+    public void setTextNull(TextField a, TextField b, TextField c) {
+        a.setText("");
+        b.setText("");
+        c.setText("");
+    }
     
     //lấy sách
 //    public List<Book> getBooks() throws SQLException{

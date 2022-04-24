@@ -29,6 +29,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+
 /**
  * FXML Controller class
  *
@@ -41,8 +42,6 @@ public class SearchController implements Initializable {
     @FXML private TextField kw_author_name;
     @FXML private TextField kw_publishingyear_name;
     @FXML private TextField kw_category_name;
-    @FXML private ComboBox<Book> cb;
-    
     
     private int totalBook;
     private List<Book> listBook;
@@ -63,55 +62,34 @@ public class SearchController implements Initializable {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        //hien thi o combobox
-//        BookService s = new BookService();
-//        try {
-//            this.cb.setItems(FXCollections.observableArrayList(s.getBooks()));
-//        } catch (SQLException ex) {
-//            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         
-
         //tìm kiếm theo tên sách
         this.kw_book_name.textProperty().addListener((evt) -> {
-            try {
-                this.kw_author_name.setText("");
-                this.kw_category_name.setText("");
-                this.kw_publishingyear_name.setText("");
-                
-                this.LoadTableDataBook_ByBookName(this.kw_book_name.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });   
+                try {
+                    this.LoadTableDataBook_ByBookName(this.kw_book_name.getText());
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });       
         
         
         //tìm kiếm theo tên tác giả
         this.kw_author_name.textProperty().addListener((evt) -> {
             try {
-                
-//                this.kw_book_name.setText("");
-//                this.kw_category_name.setText("");
-//                this.kw_publishingyear_name.setText("");}
-                
                 this.LoadTableDataBook_ByAuthorName(this.kw_author_name.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }); 
+        });
         
         
         //tìm kiếm theo loại sách
         this.kw_category_name.textProperty().addListener((evt) -> {
             try {
-//                this.kw_book_name.setText("");
-//                this.kw_author_name.setText("");
-//                this.kw_publishingyear_name.setText("");
-                
                 this.LoadTableDataBook_ByCategoryBook(this.kw_category_name.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,10 +102,6 @@ public class SearchController implements Initializable {
         //tìm kiếm theo năm xuất bản
         this.kw_publishingyear_name.textProperty().addListener((evt) -> {
             try {
-//                this.kw_book_name.setText("");
-//                this.kw_author_name.setText("");
-//                this.kw_category_name.setText("");
-                
                 this.LoadTableDataBook_ByPublishingYear(this.kw_publishingyear_name.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,6 +147,7 @@ public class SearchController implements Initializable {
         this.tb_book.getColumns().addAll(colName, colCategory, colAuthor, colDes, colPublishCompany, colPublishYear, colSelect);
     }
     
+    
     //hiển thị dữ liệu sách lên table book theo tên sách
      private void LoadTableDataBook_ByBookName(String kw) throws SQLException, ParseException{
         BookService s = new BookService();
@@ -201,7 +176,45 @@ public class SearchController implements Initializable {
         this.tb_book.setItems(FXCollections.observableArrayList(s.getBook_By_CategoryBook(kw)));
     }
      
-  
+    
+    //tìm kiếm 1 ô, xoá trắng các ô còn lại
+    @FXML
+    private void keyPressed_BookName(KeyEvent e) {
+        if (e.getText()!="")
+            bs.setTextNull(kw_author_name, kw_category_name, kw_publishingyear_name);
+    }  
+    
+    BookService bs = new BookService();
+    
+    @FXML
+    private void keyPressed_AuthorName(KeyEvent e) {
+        if (e.getText()!="") 
+            bs.setTextNull(kw_book_name, kw_category_name, kw_publishingyear_name);
+    }
+    
+    
+    @FXML
+    private void keyPressed_Category(KeyEvent e) {
+        if (e.getText()!="")
+            bs.setTextNull(kw_book_name, kw_author_name, kw_publishingyear_name);
+    }
+    
+    
+    @FXML
+    private void keyPressed_Year(KeyEvent e) {
+        if (e.getText()!="") 
+            bs.setTextNull(kw_book_name, kw_category_name, kw_author_name);
+        
+        //hạn chế chỉ nhập số
+        this.kw_publishingyear_name.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*"))
+                kw_publishingyear_name.setText(newValue.replaceAll("[^\\d]", ""));
+        });
+    }
+    
+   
+     
+    //sự kiện tick chọn combobox
     @FXML
     private void handleClickTableViewBook(MouseEvent click){
         try{

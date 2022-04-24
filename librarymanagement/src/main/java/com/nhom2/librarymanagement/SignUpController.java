@@ -10,6 +10,7 @@ import com.nhom2.pojo.Reader;
 import com.nhom2.services.DepartmentServices;
 import com.nhom2.services.ReaderServices;
 import com.nhom2.utils.AlertUtils;
+import com.nhom2.utils.EmailFormatUtils;
 import com.nhom2.utils.Utils;
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +34,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -52,7 +54,7 @@ public class SignUpController implements Initializable {
     @FXML private TextField username;
     @FXML private TextField pass;
     @FXML private TextField pass2;
-     
+    
     
     /**
      * Initializes the controller class.
@@ -60,6 +62,7 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+       
         initComboBoxObject();
         initComboBoxSex();
         
@@ -85,17 +88,8 @@ public class SignUpController implements Initializable {
 //        this.sex.setValue("Nam");
     }
     
-//    public static void init_Null(TextField name, DatePicker day, TextField email, TextField phone, 
-//             TextField add, TextField username, TextField pass1, TextField pass2){
-//        name.setText(null);
-//        email.setText(null);
-//        phone.setText(null);
-//        add.setText(null);
-//        username.setText(null);
-//        pass1.setText(null);
-//        pass2.setText(null);
-//    }
-    
+
+    //làm mới lại các giá trị 
     public static void init_Null(String name, String email, String phone, 
              String add, String username, String pass1, String pass2){
         name = null;
@@ -105,24 +99,10 @@ public class SignUpController implements Initializable {
         username = null;
         pass1 = null;
         pass2 = null;
-//        day = null;
     }
+
     
-//    public static void init_Null2(TextField name, TextField email, TextField phone, 
-//             TextField add, TextField username, TextField pass1, TextField pass2){
-//        name = null;
-//        email = null;
-//        phone = null;
-//        add = null;
-//        username = null;
-//        pass1 = null;
-//        pass2 = null;
-////        day = null;
-////        obj.setValue(null);
-////        sex.setValue(null);
-////        d.setValue(null);
-//    }
-    
+    //button đăng ký
     String r_email, r_add, r_phone, r_username, r_pass, r_pass2, r_name;
     public void btnSignUp(ActionEvent event) throws ParseException, SQLException, IOException {
         try{
@@ -151,7 +131,7 @@ public class SignUpController implements Initializable {
             r_pass2 = this.pass2.getText();
                   
             ReaderServices rd = new ReaderServices(); 
-            
+            EmailFormatUtils e = new EmailFormatUtils();
             if (r_name.equals("")|| r_pass.equals("") || r_pass2.equals("") ||
                     r_username.equals("") || r_email.equals("") || r_phone.equals("") ||
                     r_add.equals("") || r_date_of_birth.equals("") || object.getValue().equals("") ||
@@ -160,7 +140,16 @@ public class SignUpController implements Initializable {
                 SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
                 AlertUtils.showAlert("Phải nhập đầy đủ các trường dữ liệu!", Alert.AlertType.ERROR);
             }
-           
+            else if (rd.check_PhoneNumber(r_phone)==false)
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
+                AlertUtils.showAlert("Định dạng số điện thoại không hợp lệ", Alert.AlertType.ERROR);
+            }
+            else if (e.validate_Email(r_email)==false)
+            {
+                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
+                AlertUtils.showAlert("Định dạng email không hợp lệ", Alert.AlertType.ERROR);
+            }
             else if (rd.checkPass_less6character(r_pass))
             {
                 SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
@@ -197,6 +186,18 @@ public class SignUpController implements Initializable {
     }
     
     
+    //không cho nhập chữ
+    @FXML
+    private void restrictNumbersOnly(KeyEvent keyEvent) {
+        this.phone.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            phone.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
+    }
+    
+    
+    //button quay lại
     public void btn_Return(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("Signin_up.fxml"));
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
