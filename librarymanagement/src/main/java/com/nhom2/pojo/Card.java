@@ -17,8 +17,7 @@ public class Card {
     private boolean active;
     private Date activation_date;
     private Date expiration_date;
-    private Float total_money_penatly;
-
+    private Float total_money_penatly; 
     
     public Card() {}
     
@@ -62,9 +61,8 @@ public class Card {
     /**
      * @return the activation_date
      */
-    public String getActivation_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(activation_date);
+    public Date getActivation_date() {
+        return activation_date;
     }
 
     /**
@@ -77,9 +75,8 @@ public class Card {
     /**
      * @return the expiration_date
      */
-    public String getExpiration_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(expiration_date);
+    public Date getExpiration_date() {
+        return expiration_date;
     }
 
     /**
@@ -89,6 +86,7 @@ public class Card {
         this.expiration_date = expiration_date;
     }
 
+    
     /**
      * @return the total_money_penatly
      */
@@ -102,4 +100,5 @@ public class Card {
     public void setTotal_money_penatly(Float total_money_penatly) {
         this.total_money_penatly = total_money_penatly;
     }
+
 }

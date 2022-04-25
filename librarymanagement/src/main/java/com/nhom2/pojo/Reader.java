@@ -10,10 +10,11 @@ import java.util.Date;
 
 /**
  *
- * @author ASUS
+ * @author Phan Thi Dieu Hien
  */
 public class Reader {
     private int reader_id;
+    private boolean active;
     private String reader_name;
     private String username;
     private String password;
@@ -23,7 +24,6 @@ public class Reader {
     private String address;
     private String phone;
     private String object;
-    private boolean active;
     private String user_role;
     private int department_id;
     private String name;
@@ -50,6 +50,14 @@ public class Reader {
         this.active = active;
         this.user_role = user_role; 
         this.department_id = department_id;
+    }
+  
+    public Reader(String reader_name, String sex,
+            Date date_of_birth, String email) {         
+        this.reader_name = reader_name;        
+        this.sex = sex;
+        this.date_of_birth = date_of_birth;
+        this.email = email;      
     }
 
     public Reader(int reader_id, String reader_name,
@@ -285,5 +293,5 @@ public class Reader {
     public void setActivation_date(Date activation_date) {
         this.activation_date = activation_date;
     }
-    
+  
 }

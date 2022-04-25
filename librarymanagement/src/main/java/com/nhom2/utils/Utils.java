@@ -13,9 +13,16 @@ import javafx.scene.control.Alert;
 
 /**
  *
- * @author LENOVO
+ * @author Phan Thi Dieu Hien
  */
 public class Utils {
+
+    private Utils() {
+    }
+ /**
+ *
+ * @author LENOVO
+ */
     public static Alert getBox (String content, Alert.AlertType type){
         Alert alert = new Alert(type);
         alert.setContentText(content);
@@ -37,6 +44,5 @@ public class Utils {
         }
         return true;
     }
-    
-
+}
 

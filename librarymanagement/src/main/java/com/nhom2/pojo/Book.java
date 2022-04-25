@@ -5,8 +5,10 @@
  */
 package com.nhom2.pojo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import javafx.scene.control.CheckBox;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -23,36 +25,54 @@ public class Book {
     private Date publishing_year;
     private String category;
     private String author;
+
+    private CheckBox select;
     
-    public Book() {}
-    
-    public Book(int book_id, String book_name, String description, 
-                 String publishing_company, 
-                Date import_date, boolean active, String location, 
-                Date publishing_year, String category, String author) {
+    public Book() {
+    }
+
+    public Book(int book_id, String book_name, String description, String publishing_company, Date import_date, boolean active, String location, Date publishing_year, String category, String author) {
         this.book_id = book_id;
         this.book_name = book_name;
-        this.description = description;  
+        this.description = description;
         this.publishing_company = publishing_company;
         this.import_date = import_date;
         this.active = active;
         this.location = location;
         this.publishing_year = publishing_year;
         this.category = category;
-        this.author = author;      
-    }
-
-    public Book(String book_name, String description, String publishing_company, Date import_date, String location, Date publishing_year, String category, String author) {
-        this.book_name = book_name;
-        this.description = description;  
-        this.publishing_company = publishing_company;
-        this.import_date = import_date;
-        this.location = location;
-        this.publishing_year = publishing_year;
-        this.category = category;
         this.author = author;
     }
 
+    
+//    public Book(String book_name, String description, String publishing_company, Date publishing_year, String category, String author) {
+//        this.book_name = book_name;
+//        this.description = description;
+//        this.publishing_company = publishing_company;
+//        this.publishing_year = publishing_year;
+//        this.category = category;
+//        this.author = author;
+//    }
+    
+    
+    public Book(String book_name, String category, String author, String description, String publishing_company, Date publishing_year) {
+       
+        this.book_name = book_name;
+        this.category = category;
+        this.author = author;
+        this.description = description;
+        this.publishing_company = publishing_company;
+        this.publishing_year = publishing_year;
+        this.select = new CheckBox();
+        this.select.setDisable(true);
+    }
+
+    @Override
+    public String toString() {
+        return this.publishing_company;
+    }
+    
+            
     /**
      * @return the book_id
      */
@@ -68,20 +88,6 @@ public class Book {
     }
 
     /**
-     * @return the active
-     */
-    public boolean isActive() {
-        return active=true;
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    /**
      * @return the book_name
      */
     public String getBook_name() {
@@ -93,6 +99,20 @@ public class Book {
      */
     public void setBook_name(String book_name) {
         this.book_name = book_name;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -112,9 +132,8 @@ public class Book {
     /**
      * @return the import_date
      */
-    public String getImport_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(import_date);
+    public Date getImport_date() {
+        return import_date;
     }
 
     /**
@@ -122,6 +141,20 @@ public class Book {
      */
     public void setImport_date(Date import_date) {
         this.import_date = import_date;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     /**
@@ -141,9 +174,8 @@ public class Book {
     /**
      * @return the publishing_year
      */
-    public String getPublishing_year() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(publishing_year);
+    public Date getPublishing_year() {
+        return publishing_year;
     }
 
     /**
@@ -182,18 +214,17 @@ public class Book {
     }
 
     /**
-     * @return the description
+     * @return the select
      */
-    public String getDescription() {
-        return description;
+    public CheckBox getSelect() {
+        return select;
     }
 
     /**
-     * @param description the description to set
+     * @param select the select to set
      */
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSelect(CheckBox select) {
+        this.select = select;
     }
-
    
 }
