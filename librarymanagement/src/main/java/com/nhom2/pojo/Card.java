@@ -5,6 +5,7 @@
  */
 package com.nhom2.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -16,17 +17,17 @@ public class Card {
     private boolean active;
     private Date activation_date;
     private Date expiration_date;
-    private String total_money_penalty;
-    
+    private Float total_money_penatly; 
     
     public Card() {}
     
-    public Card(int card_id, boolean active, Date activation_date, Date expiration_date, String total_money_penalty) {
-        this.card_id = card_id;
+    public Card(int card_id, boolean active, Date activation_date,
+                  Date expiration_date, Float total_money_penatly) {
+        this.card_id = card_id;   
         this.active = active;
         this.activation_date = activation_date;
         this.expiration_date = expiration_date;
-        this.total_money_penalty = total_money_penalty;
+        this.total_money_penatly = total_money_penatly;
     }
 
     /**
@@ -85,23 +86,19 @@ public class Card {
         this.expiration_date = expiration_date;
     }
 
-    /**
-     * @return the total_money_penalty
-     */
-    public String getTotal_money_penalty() {
-        return total_money_penalty;
-    }
-
-    /**
-     * @param total_money_penalty the total_money_penalty to set
-     */
-    public void setTotal_money_penalty(String total_money_penalty) {
-        this.total_money_penalty = total_money_penalty;
-    }
-
-    /**
-     * @return the borrow_id
-     */
-   
     
+    /**
+     * @return the total_money_penatly
+     */
+    public Float getTotal_money_penatly() {
+        return total_money_penatly;
+    }
+
+    /**
+     * @param total_money_penatly the total_money_penatly to set
+     */
+    public void setTotal_money_penatly(Float total_money_penatly) {
+        this.total_money_penatly = total_money_penatly;
+    }
+
 }

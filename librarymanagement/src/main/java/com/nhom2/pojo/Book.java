@@ -7,6 +7,8 @@ package com.nhom2.pojo;
 
 import java.util.Date;
 import javafx.scene.control.CheckBox;
+import java.text.SimpleDateFormat;
+
 
 /**
  *
@@ -23,6 +25,7 @@ public class Book {
     private Date publishing_year;
     private String category;
     private String author;
+
     private CheckBox select;
     
     public Book() {
@@ -223,6 +226,5 @@ public class Book {
     public void setSelect(CheckBox select) {
         this.select = select;
     }
-    
-    
+   
 }

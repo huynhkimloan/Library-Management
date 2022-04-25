@@ -5,6 +5,7 @@
  */
 package com.nhom2.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -25,6 +26,8 @@ public class Reader {
     private String object;
     private String user_role;
     private int department_id;
+    private String name;
+    private Date activation_date;
     
     public Reader() {}
     
@@ -48,12 +51,35 @@ public class Reader {
         this.user_role = user_role; 
         this.department_id = department_id;
     }
+  
     public Reader(String reader_name, String sex,
             Date date_of_birth, String email) {         
         this.reader_name = reader_name;        
         this.sex = sex;
         this.date_of_birth = date_of_birth;
         this.email = email;      
+    }
+
+    public Reader(int reader_id, String reader_name,
+                  String username, String password,
+                  String sex, Date date_of_birth,
+                  String email, String address,
+                  String phone, String object, boolean active,
+                  String user_role, int department_id, Date activation_date) {   
+        this.reader_id = reader_id;   
+        this.reader_name = reader_name;
+        this.username = username;
+        this.password = password;
+        this.sex = sex;
+        this.date_of_birth = date_of_birth;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.object = object;
+        this.active = active;
+        this.user_role = user_role; 
+        this.department_id = department_id;
+        this.activation_date = activation_date;
     }
 
     /**
@@ -68,20 +94,6 @@ public class Reader {
      */
     public void setReader_id(int reader_id) {
         this.reader_id = reader_id;
-    }
-
-    /**
-     * @return the active
-     */
-    public boolean isActive() {
-        return active;
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     /**
@@ -143,8 +155,9 @@ public class Reader {
     /**
      * @return the date_of_birth
      */
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public String getDate_of_birth() {
+        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
+        return f.format(date_of_birth);
     }
 
     /**
@@ -211,6 +224,20 @@ public class Reader {
     }
 
     /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    /**
      * @return the user_role
      */
     public String getUser_role() {
@@ -237,4 +264,34 @@ public class Reader {
     public void setDepartment_id(int department_id) {
         this.department_id = department_id;
     }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the activation_date
+     */
+    public String getActivation_date() {
+        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
+        return f.format(activation_date);
+    }
+
+    /**
+     * @param activation_date the activation_date to set
+     */
+    public void setActivation_date(Date activation_date) {
+        this.activation_date = activation_date;
+    }
+  
 }

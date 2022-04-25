@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="878.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.ReturnBookController">
+   <children>
+      <Pane layoutX="440.0" layoutY="99.0" prefHeight="125.0" prefWidth="324.0">
+         <children>
+            <Text layoutX="94.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Main" text="Tra cứu thông tin" />
+            <TextField fx:id="txtKw" layoutX="95.0" layoutY="60.0" prefHeight="30.0" prefWidth="138.0" promptText="Nhập mã mượn sách..." />
+            <Pane layoutX="54.0" layoutY="28.0" prefHeight="3.0" prefWidth="219.0" styleClass="Border" />
+         </children>
+      </Pane>
+      <Pane layoutX="-43.0" layoutY="73.0" prefHeight="3.0" prefWidth="923.0" styleClass="Border" />
+      <TableView fx:id="tbData" layoutX="355.0" layoutY="217.0" prefHeight="260.0" prefWidth="493.0" />
+      <Pane layoutX="14.0" layoutY="98.0" prefHeight="378.0" prefWidth="340.0">
+         <children>
+            <Text layoutX="65.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Main" text="Thông tin trả sách" wrappingWidth="154.466796875" />
+            <GridPane layoutX="11.0" layoutY="46.0" prefHeight="267.0" prefWidth="302.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="115.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="156.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mã mượn sách" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày mượn" GridPane.rowIndex="3" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mã thẻ" GridPane.rowIndex="1" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mã sách" GridPane.rowIndex="2" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày trả" GridPane.rowIndex="4" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Số lượng" GridPane.rowIndex="5" />
+                    <TextField fx:id="txtBorrow_id" disable="true" prefHeight="25.0" prefWidth="183.0" GridPane.columnIndex="1" />
+                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiền phạt quá hạn" GridPane.rowIndex="6" />
+                    <TextField fx:id="txtCard_id" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtBook_id" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="dpkStart_date" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <DatePicker fx:id="dpkEnd_date" promptText="Nhập ngày trả..." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField fx:id="txtAmount" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <TextField fx:id="txtFine" disable="true" style="-fx-font-weight: bold;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trạng thái" GridPane.rowIndex="7" />
+                  <TextField fx:id="txtStatus" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                </children>
+            </GridPane>
+            <Button layoutX="123.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#addView" prefHeight="30.0" prefWidth="95.0" styleClass="Special" text="Thanh toán" />
+            <Pane layoutX="42.0" layoutY="34.0" prefHeight="3.0" prefWidth="200.0" styleClass="Border" />
+            <Button layoutX="231.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#refreshTable" prefHeight="30.0" prefWidth="95.0" styleClass="Normal" text="Làm mới" />
+            <Button layoutX="14.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#restore" prefHeight="30.0" prefWidth="95.0" styleClass="Common" text="Trả sách" />
+         </children>
+      </Pane>
+      <Text layoutX="291.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="CHI TIẾT TRẢ SÁCH" />
+   </children>
+</AnchorPane>

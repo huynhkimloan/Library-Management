@@ -5,6 +5,10 @@
  */
 package com.nhom2.utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import javafx.scene.control.Alert;
 
 /**
@@ -12,19 +16,33 @@ import javafx.scene.control.Alert;
  * @author Phan Thi Dieu Hien
  */
 public class Utils {
-    public static Alert getBox(String content, Alert.AlertType type) {
-        Alert alert = new Alert(type);
-        alert.setContentText(content);
-        return alert;
-    }
-
-    public static String removeWhitespace(String txt){
-        return txt.trim().replaceAll(" +", " ");        
-    }
 
     private Utils() {
     }
-
+ /**
+ *
+ * @author LENOVO
+ */
+    public static Alert getBox (String content, Alert.AlertType type){
+        Alert alert = new Alert(type);
+        alert.setContentText(content);
+        
+        return alert;
+    }    
     
-
+    public static String removeWhitespace(String txt){
+        return txt.trim().replaceAll(" +", " ");        
+    }
+    
+    public static boolean isValidDate(String dateStr, String dateFormat){
+        DateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setLenient(false);
+        try {
+            sdf.parse(dateStr);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
 }
+
