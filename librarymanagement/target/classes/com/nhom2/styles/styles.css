@@ -2,12 +2,233 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
-*/
+*//*
+ * Empty Stylesheet file.
+ */
+
+VBox.Statistical {
+    -fx-background-color: lightblue;
+    -fx-family: Tahoma;
+    -fx-spacing: 20;
+    -fx-padding: 20;
+}
+
+.Statistical HBox {
+    -fx-spacing: 10;
+}
+.pay {
+    
+    -fx-background-color: moccasin;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-pref-width: 200;
+     -fx-padding: 10;
+   
+    
+    
+}
+
+.Borrow {
+    
+    -fx-background-color: moccasin; 
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-pref-width: 200;     
+    -fx-spacing: 20;
+    -fx-padding: 10;
+}
+
+.NhapNam { 
+    -fx-border: 2;
+    -fx-background-color: white;
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER;
+}
+
+.Statistical Label {
+    -fx-background-color: white;
+    -fx-alignment: CENTER;
+}
+
+.chuaTraSach {
+    -fx-background-color: moccasin; 
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-pref-width: 200;     
+    -fx-spacing: 20;
+    -fx-padding: 10;
+}
+
+.title {
+    -fx-aligment: CENTER;
+    
+}
+
+.Statistical .ReSetBP {
+   -fx-alignment: CENTER; 
+}
+
+/*Management*/
+.ManagementBook, .ManagementReader {
+    -fx-background-color: lightgreen;
+    -fx-family: Tahoma;
+    -fx-alignment: CENTER;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+/*ManagementBook*/
+.ManagementBook *{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 10;
+}
+
+.txt-managementbook Text, TextField, TextArea, DatePicker{
+    -fx-pref-width: 1000;
+}
+
+.btn-managementbook {
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER;
+    -fx-spacing: 20;
+    -fx-font-weight: bold;
+}
+
+Text.title-managementbook {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-fill: lightgreen;
+    -fx-stroke-width: 3;
+    -fx-stroke: green;
+}
+
+Lable.lbMess {
+    -fx-fill: red;
+}
+
+/*
+.paneReserve {
+    -fx-background-color: lightgreen;
+    -fx-padding: 20;
+    
+}
+
+.Management, .ManagementBook {
+    -fx-background-color: lightgreen;
+    -fx-family: Tahoma;
+    -fx-alignment: CENTER;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+Button.btn-management {
+    -fx-font-size: 24;
+    -fx-pref-width: 400;
+}
+
+ManagementBook
+.ManagementBook *{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 10;
+}
+
+.txt-managementbook Text, TextField, TextArea, DatePicker{
+    -fx-pref-width: 1000;
+}
+
+.btn-managementbook {
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER;
+    -fx-spacing: 20;
+    -fx-font-weight: bold;
+}
+
+Text.title-managementbook {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-fill: lightgreen;
+    -fx-stroke-width: 3;
+    -fx-stroke: green;
+}
+
+Lable.lbMess {
+    -fx-fill: red;
+}*/
+
 /* 
     Created on : Apr 21, 2022, 5:31:17 PM
     Author     : ASUS
 */
 
+/*Management*/
+.ManagementBook, .ManagementReader {
+    -fx-background-color: lightgreen;
+    -fx-family: Tahoma;
+    -fx-alignment: CENTER;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+}
+
+/*ManagementBook*/
+.ManagementBook *{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 10;
+}
+
+.txt-managementbook Text, TextField, TextArea, DatePicker{
+    -fx-pref-width: 1000;
+}
+
+.btn-managementbook {
+    -fx-pref-width: 200;
+    -fx-alignment: CENTER;
+    -fx-spacing: 20;
+    -fx-font-weight: bold;
+}
+
+Text.title-managementbook {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-fill: lightgreen;
+    -fx-stroke-width: 3;
+    -fx-stroke: green;
+}
+
+Lable.lbMess {
+    -fx-fill: red;
+}
+
+/*ManagementReader*/
+.ManagementReader Text, TextField, ComboBox, DatePicker {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 15;
+}
+
+Text.title-managementreader {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-fill: lightgreen;
+    -fx-stroke-width: 3;
+    -fx-stroke: green;
+}
+
+.txt-managementreader {
+    -fx-pref-width: 500;
+   
+}
+
+/*return*/
 *
 {
     -fx-font-family: Tahoma;

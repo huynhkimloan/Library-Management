@@ -16,7 +16,7 @@
       <Pane layoutX="440.0" layoutY="99.0" prefHeight="125.0" prefWidth="324.0">
          <children>
             <Text layoutX="94.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Main" text="Tra cứu thông tin" />
-            <TextField fx:id="txtKw" layoutX="95.0" layoutY="60.0" prefHeight="30.0" prefWidth="138.0" promptText="Nhập mã mượn sách..." />
+            <TextField fx:id="txtKw" layoutX="95.0" layoutY="48.0" prefHeight="30.0" prefWidth="138.0" promptText="Nhập mã thẻ..." />
             <Pane layoutX="54.0" layoutY="28.0" prefHeight="3.0" prefWidth="219.0" styleClass="Border" />
          </children>
       </Pane>

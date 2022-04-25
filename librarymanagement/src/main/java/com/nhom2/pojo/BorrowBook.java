@@ -5,6 +5,7 @@
  */
 package com.nhom2.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,24 +13,47 @@ import java.util.Date;
  * @author ASUS
  */
 public class BorrowBook {
+    
     private int borrow_id;
+    private int card_id ;
+    private int book_id;
     private Date start_date;
     private Date end_date;
     private int amount;
-    private int card_id;
-    private int book_id;
+    private float fine;
+    private int status;
+    private String note;
     
+    public BorrowBook()
+    {
+        
+    }
     
-    public BorrowBook() {}
-    
-    public BorrowBook(int borrow_id, Date start_date, Date end_date, int amount, int card_id, int book_id) {
+    public BorrowBook(int borrow_id, Date start_date, Date end_date, int amount,
+            int card_id, int book_id, float fine, int status)
+    {
         this.borrow_id = borrow_id;
+        this.card_id = card_id;
+        this.book_id = book_id;
         this.start_date = start_date;
         this.end_date = end_date;
         this.amount = amount;
+        this.fine = fine;
+        this.status = status;
+    }
+    
+    public BorrowBook(int borrow_id, Date start_date,int amount,
+            int card_id, int book_id, float fine, int status)
+    {
+        this.borrow_id = borrow_id;
         this.card_id = card_id;
         this.book_id = book_id;
+        this.start_date = start_date;
+        this.amount = amount;
+        this.fine = fine;
+        this.status = status;
     }
+
 
     /**
      * @return the borrow_id
@@ -43,48 +67,6 @@ public class BorrowBook {
      */
     public void setBorrow_id(int borrow_id) {
         this.borrow_id = borrow_id;
-    }
-
-    /**
-     * @return the start_date
-     */
-    public Date getStart_date() {
-        return start_date;
-    }
-
-    /**
-     * @param start_date the start_date to set
-     */
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
-    }
-
-    /**
-     * @return the end_date
-     */
-    public Date getEnd_date() {
-        return end_date;
-    }
-
-    /**
-     * @param end_date the end_date to set
-     */
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
-    }
-
-    /**
-     * @return the amount
-     */
-    public int getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     /**
@@ -116,7 +98,90 @@ public class BorrowBook {
     }
 
     /**
-     * @return the borrow_id
+     * @return the start_date
      */
+    public String getStart_date() {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(start_date);
+    }
+
+    /**
+     * @param start_date the start_date to set
+     */
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
+
+    /**
+     * @return the end_date
+     */
+    public Date getEnd_date() {
+        return end_date;
+    }
+
+    /**
+     * @param end_date the end_date to set
+     */
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
+    }
+
+
+    /**
+     * @return the amount
+     */
+    public int getAmount() {
+        return amount;
+    }
+
+    /**
+     * @param amount the amount to set
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * @return the fine
+     */
+    public float getFine() {
+        return fine;
+    }
+
+    /**
+     * @param fine the fine to set
+     */
+    public void setFine(float fine) {
+        this.fine = fine;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the note
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * @param note the note to set
+     */
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
     
 }
