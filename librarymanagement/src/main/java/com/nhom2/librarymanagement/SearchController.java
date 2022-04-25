@@ -5,72 +5,74 @@
  */
 package com.nhom2.librarymanagement;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
 import com.nhom2.pojo.Book;
-import com.nhom2.pojo.Reader;
+import com.nhom2.pojo.ReserveBook;
 import com.nhom2.services.BookService;
-import com.nhom2.utils.AlertUtils;
+import com.nhom2.services.Reserve;
+import com.nhom2.utils.Utils;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+
+
 
 /**
  * FXML Controller class
  *
- * @author phamt
+ * @author ASUS
  */
-public class SearchController implements Initializable {
+public class SearchController  implements Initializable {
+
     @FXML private TableView<Book> tb_book;
     @FXML private TextField kw_book_name;
     @FXML private TextField kw_author_name;
     @FXML private TextField kw_publishingyear_name;
     @FXML private TextField kw_category_name;
     
+    private int bookID = 1;
+    private int cardID = 1;
     private int totalBook;
     private List<Book> listBook;
-    
     /**
      * Initializes the controller class.
      */
-//    @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+        // TODO
+        listBook = new ArrayList<>();
         LoadTableViewBook();
         
         try {
             LoadTableDataBook_ByBookName(null);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    
         
         //tìm kiếm theo tên sách
         this.kw_book_name.textProperty().addListener((evt) -> {
                 try {
                     this.LoadTableDataBook_ByBookName(this.kw_book_name.getText());
-                } catch (SQLException ex) {
-                    Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
+                } catch (SQLException | ParseException ex) {
                     Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });       
@@ -80,9 +82,7 @@ public class SearchController implements Initializable {
         this.kw_author_name.textProperty().addListener((evt) -> {
             try {
                 this.LoadTableDataBook_ByAuthorName(this.kw_author_name.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (SQLException | ParseException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
@@ -92,9 +92,7 @@ public class SearchController implements Initializable {
         this.kw_category_name.textProperty().addListener((evt) -> {
             try {
                 this.LoadTableDataBook_ByCategoryBook(this.kw_category_name.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (SQLException | ParseException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }); 
@@ -104,14 +102,11 @@ public class SearchController implements Initializable {
         this.kw_publishingyear_name.textProperty().addListener((evt) -> {
             try {
                 this.LoadTableDataBook_ByPublishingYear(this.kw_publishingyear_name.getText());
-            } catch (SQLException ex) {
-                Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (SQLException | ParseException ex) {
                 Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-    }   
-    
+    }
     
     //định nghĩa các cột
     private void LoadTableViewBook(){
@@ -176,11 +171,11 @@ public class SearchController implements Initializable {
         this.tb_book.setItems(FXCollections.observableArrayList(s.getBook_By_CategoryBook(kw)));
     }
      
-     
+    
     //tìm kiếm 1 ô, xoá trắng các ô còn lại
     @FXML
     private void keyPressed_BookName(KeyEvent e) {
-        if (e.getText()!="")
+        if (!"".equals(e.getText()))
             bs.setTextNull(kw_author_name, kw_category_name, kw_publishingyear_name);
     }  
     
@@ -188,21 +183,21 @@ public class SearchController implements Initializable {
     
     @FXML
     private void keyPressed_AuthorName(KeyEvent e) {
-        if (e.getText()!="") 
+        if (!"".equals(e.getText())) 
             bs.setTextNull(kw_book_name, kw_category_name, kw_publishingyear_name);
     }
     
     
     @FXML
     private void keyPressed_Category(KeyEvent e) {
-        if (e.getText()!="")
+        if (!"".equals(e.getText()))
             bs.setTextNull(kw_book_name, kw_author_name, kw_publishingyear_name);
     }
     
     
     @FXML
     private void keyPressed_Year(KeyEvent e) {
-        if (e.getText()!="") 
+        if (!"".equals(e.getText())) 
             bs.setTextNull(kw_book_name, kw_category_name, kw_author_name);
         
         //hạn chế chỉ nhập số
@@ -216,7 +211,9 @@ public class SearchController implements Initializable {
      
     //sự kiện tick chọn combobox
     @FXML
-    private void handleClickTableViewBook(MouseEvent click){
+    private void handleClickTableViewBook(MouseEvent click) throws SQLException{
+        Reserve reserve = new Reserve();
+        
         try{
             Book bk = this.tb_book.getSelectionModel().getSelectedItem();
             double temp = 0;
@@ -226,11 +223,18 @@ public class SearchController implements Initializable {
                     bk.getSelect().setSelected(false);  //chuyển trạng thái                           
                 else
                     bk.getSelect().setSelected(true); //chuyển trạng thái
+//                    bookID = bk.getBook_id();
             }
             if (bk.getSelect().isSelected()){
-                this.totalBook += 1;
-//                getReader_id();
-                listBook.add(bk);
+                int co = reserve.kiemTraSachTonTai();
+                if(co == 1)
+                {
+                    this.totalBook += 1;
+                    listBook.add(bk);
+                //bookID = bk.getBook_id();
+                }
+                else
+                    Utils.getBox("Sách bạn chọn hiện tại không còn ", Alert.AlertType.INFORMATION).show();
             }
             else{
                 listBook.remove(bk);
@@ -244,5 +248,126 @@ public class SearchController implements Initializable {
         
         }catch(NullPointerException ex){};
     }
+
+    @FXML
+    private void datSachHandler (ActionEvent event) throws ParseException, SQLException{
+        Reserve reserve = new Reserve();
+            //Kiểm tra sách có còn trong kho không 
+        //int co = reserve.kiemTraSachTonTai();
+        //Kiểm tra đã check chưa 
+        if(listBook.size() < 1)
+            Utils.getBox("Bạn cần phải chọn ít nhất 1 quyển sách ", Alert.AlertType.INFORMATION).show();
+        else {
+            int co = reserve.kiemTraSachTonTai();
+            
+            if(co == 1) {
+                //int card_id = Signin_upController.card_ID; 
+                int book_id = bookID;
+                int card_id = reserve.getCardIDFromCard(cardID);
+                //int book_id = reserve.getBookIDFromBook(bookID);
+                int amount = this.totalBook;                
+                LocalDate localDate = LocalDate.now();
+                int namHienTai = localDate.getYear();
+                int ngayHienTai = localDate.getDayOfMonth();
+                int thangHienTai = localDate.getMonthValue();
+                String s = ngayHienTai + "-" + thangHienTai + "-" + namHienTai;
+                SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");  
+                Date ngayDat = f.parse(s);
+                java.sql.Date activation_date = new java.sql.Date(ngayDat.getTime());
+
+                int da1 = localDate.getDayOfMonth(); 
+                int ngayHienTai1; 
+                switch (thangHienTai) {
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        if(da1 <= 29)
+                            ngayHienTai1 = da1 +2;
+                        else
+                            if(da1 == 30)
+                                ngayHienTai1 = 1;
+                            else
+                            {
+                                ngayHienTai1 = 2;
+                                thangHienTai++;
+                                if(thangHienTai == 12)
+                                    namHienTai++;
+                            }
+                        break;
+                    case 2:                    
+                            if(da1 <= 27)
+                            ngayHienTai1 = da1 +2;
+                            else if(da1 == 28)
+                            ngayHienTai1 = 1;
+                            else 
+                            {
+                                ngayHienTai1 = 2;
+                                thangHienTai++;
+                            }        
+                         break; 
+                    default:
+
+                        if(da1 <= 28)
+                            ngayHienTai1 = da1 +2;
+                        else 
+                            if(da1 == 29)                    
+                                ngayHienTai1 = 1;
+                            else
+                                ngayHienTai1 = 2;
+                                thangHienTai++;
+                }
+
+
+
+                String s1 = ngayHienTai1 + "-" + thangHienTai + "-" + namHienTai;
+                SimpleDateFormat f1 =new SimpleDateFormat("dd-MM-yyyy");
+                Date ngayHH = f.parse(s1);
+
+                String s2 = f.format(ngayHH);
+                Date a= f1.parse(s2);
+
+                java.sql.Date expiration_date = new java.sql.Date(a.getTime());
+                ReserveBook  rb = new ReserveBook(activation_date,expiration_date, amount, card_id, book_id);
+                reserve.datSach(rb);  
+                //Nếu có trên 2 quyển sách thì add thêm tiếp
+                initDatsach();
+                Utils.getBox("Đặt sách thành công", Alert.AlertType.INFORMATION).show();                     
+            }
+            else {
+                initDatsach();
+                Utils.getBox("Sách không có trong kho, độc giả vui lòng đặt lại sách khác", Alert.AlertType.INFORMATION).show();
+            }
+        }
+    }
     
+    
+    private int getBookID(){
+        Book depart = this.tb_book.getSelectionModel().getSelectedItem();
+        int bookID = depart.getBook_id();
+        return bookID;
+    }
+   
+    private void initDatsach(){
+            this.kw_author_name.setText("");
+            this.kw_publishingyear_name.setText("");
+            this.kw_category_name.setText("");
+            this.kw_author_name.setText("");
+            
+        }
 }
+          
+    
+        
+
+
+
+    
+    
+     
+     
+    
+
