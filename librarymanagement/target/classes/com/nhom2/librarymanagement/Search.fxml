@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.SearchController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" styleClass="vboxSearch" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.SearchController">
    <children>
-      <GridPane prefHeight="65.0" prefWidth="664.0">
+      <GridPane prefHeight="65.0" prefWidth="664.0" stylesheets="@../styles/styles.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.66666666666663" minWidth="10.0" prefWidth="490.66666666666663" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.33331298828125" minWidth="0.0" prefWidth="0.0" />
@@ -23,17 +23,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ĐẶT SÁCH" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+            <Text fill="DARKBLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐẶT SÁCH" GridPane.columnSpan="2" GridPane.halignment="CENTER">
                <font>
-                  <Font size="25.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Text>
          </children>
       </GridPane>
       <GridPane>
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.33331298828125" minWidth="10.0" prefWidth="51.33330663045248" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.3333600362141" minWidth="10.0" prefWidth="515.3333600362141" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.33331298828125" minWidth="10.0" prefWidth="161.99998982747397" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="540.6666666666666" minWidth="10.0" prefWidth="538.000010172526" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -62,7 +62,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="kw_book_name" onKeyPressed="#keyPressed_BookName" prefHeight="25.0" prefWidth="309.0" promptText="Nhập tên sách" GridPane.columnIndex="1">
+            <TextField fx:id="kw_book_name" onKeyPressed="#keyPressed_BookName" prefHeight="25.0" prefWidth="525.0" promptText="Nhập tên sách" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
@@ -94,8 +94,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <TableView fx:id="tb_book" onMouseClicked="#handleClickTableViewBook" prefHeight="144.0" prefWidth="700.0" />
-      <GridPane layoutX="10.0" layoutY="195.0" prefHeight="9.0" prefWidth="700.0">
+      <TableView fx:id="tb_book" onMouseClicked="#handleClickTableViewBook" prefHeight="300.0" prefWidth="700.0" styleClass="tbBook" stylesheets="@../styles/styles.css" />
+      <GridPane layoutX="10.0" layoutY="195.0" prefHeight="8.0" prefWidth="700.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="490.66666666666663" minWidth="10.0" prefWidth="490.66666666666663" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="351.33331298828125" minWidth="0.0" prefWidth="0.0" />
@@ -106,7 +106,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Đặt sách">
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" styleClass="btnReserve" stylesheets="@../styles/styles.css" text="Đặt sách" textFill="WHITE">
          <VBox.margin>
             <Insets left="620.0" right="10.0" />
          </VBox.margin>

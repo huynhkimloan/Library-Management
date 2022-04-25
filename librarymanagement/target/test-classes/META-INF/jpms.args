@@ -1,4 +1,0 @@
---patch-module
-com.nhom2.librarymanagement=_
---add-reads
-com.nhom2.librarymanagement=ALL-UNNAMED

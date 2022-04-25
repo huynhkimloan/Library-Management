@@ -8,3 +8,14 @@ and open the template in the editor.
     Author     : ASUS
 */
 
+GridPane.grpSignIn, GridPane.grpSignUp, .vboxSearch, .tbBook {
+    -fx-background-color: lavenderblush;
+}
+
+Button.btnSignIn, Button.btnSignUp, Button.btnReturn, Button.btnReserve {
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
+    /*-fx-font-weight: bold;*/
+}
+
+

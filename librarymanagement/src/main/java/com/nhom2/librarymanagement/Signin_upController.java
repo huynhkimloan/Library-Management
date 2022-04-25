@@ -83,8 +83,8 @@ public class Signin_upController implements Initializable {
         }
         else if (user.equals("") && pass.equals("")) {
             AlertUtils.showAlert("Phải nhập tài khoản và mật khẩu!", Alert.AlertType.WARNING);
-            this.username.setStyle("-fx-border-color: gold;");
-            this.password.setStyle("-fx-border-color: gold;");
+            this.username.setStyle("-fx-border-color: lightskyblue;");
+            this.password.setStyle("-fx-border-color: lightskyblue;");
             role = null;
         }
         else if (user.equals("")) {

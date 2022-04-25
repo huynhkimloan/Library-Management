@@ -12,22 +12,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.Signin_upController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="377.0" styleClass="grpSignIn" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.Signin_upController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.3333740234375" minWidth="10.0" prefWidth="123.33333333333333" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.33331298828125" minWidth="10.0" prefWidth="284.6666666666667" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="50.33331298828125" minHeight="10.0" prefHeight="42.00000317891438" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="91.00001335144043" minHeight="10.0" prefHeight="40.66665649414062" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="50.666666666666664" minHeight="10.0" prefHeight="50.666666666666664" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="91.00001335144043" minHeight="10.0" prefHeight="32.666666666666664" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="125.99999618530273" minHeight="10.0" prefHeight="32.000010172526046" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="120.33333587646484" minHeight="10.0" prefHeight="31.666666666666657" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="56.66667683919272" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Text fill="#00059d" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐĂNG NHẬP" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+      <Text fill="DARKBLUE" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐĂNG NHẬP" wrappingWidth="127.9072265625" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <font>
-            <Font name="System Bold" size="21.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
       <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -35,12 +35,12 @@
             <Insets left="5.0" right="20.0" />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#btnSignUp" text="Đăng ký" GridPane.rowIndex="4">
+      <Button mnemonicParsing="false" onAction="#btnSignUp" styleClass="btnSignUp" text="Đăng ký" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#btnSignIn" text="Đăng nhập" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+      <Button mnemonicParsing="false" onAction="#btnSignIn" styleClass="btnSignIn" text="Đăng nhập" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets right="20.0" />
          </GridPane.margin>
