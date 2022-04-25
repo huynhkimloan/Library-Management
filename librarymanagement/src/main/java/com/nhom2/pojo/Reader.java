@@ -82,6 +82,35 @@ public class Reader {
         this.activation_date = activation_date;
     }
 
+    
+    public Reader(int reader_id, String reader_name, 
+            String username, String password, 
+            String email, boolean active, int department_id) {
+        this.reader_id = reader_id;
+        this.reader_name = reader_name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+        this.department_id = department_id;
+    }
+
+    public Reader(String reader_name, String username, String password, String email, boolean active, int department_id, String sex, String phone, String address, String object, String user_role, Date date_of_birth) {
+        this.reader_name = reader_name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+        this.department_id = department_id;
+        this.sex = sex;
+        this.phone = phone;
+        this.address = address;
+        this.object = object;
+        this.user_role = user_role;
+        this.date_of_birth = date_of_birth;
+    }
+    
+    
     /**
      * @return the reader_id
      */
@@ -158,6 +187,10 @@ public class Reader {
     public String getDate_of_birth() {
         SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
         return f.format(date_of_birth);
+    }
+    
+    public Date getDate_of_birth2() {
+        return date_of_birth;
     }
 
     /**

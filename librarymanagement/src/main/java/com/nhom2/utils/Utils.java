@@ -23,6 +23,7 @@ public class Utils {
  *
  * @author LENOVO
  */
+    
     public static Alert getBox (String content, Alert.AlertType type){
         Alert alert = new Alert(type);
         alert.setContentText(content);
@@ -44,5 +45,7 @@ public class Utils {
         }
         return true;
     }
+    
+    
 }
 
