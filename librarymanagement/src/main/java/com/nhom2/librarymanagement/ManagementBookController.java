@@ -17,11 +17,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -56,7 +58,8 @@ public class ManagementBookController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+        resetBook();
+        DayLimit();
         this.loadTableView();
         try {
             this.loadTableData(null);
@@ -127,7 +130,7 @@ public class ManagementBookController implements Initializable {
     }
     
     @FXML
-    private void handleClickTableView(MouseEvent click) throws SQLException{
+    private void handleClickTableView(MouseEvent click) throws SQLException, ParseException{
         Book b = tbBooks.getSelectionModel().getSelectedItem();
         if (b!=null) {
             txtBookName.setText(b.getBook_name());
@@ -135,13 +138,18 @@ public class ManagementBookController implements Initializable {
             txtCategory.setText(b.getCategory());
             txtAuthor.setText(b.getAuthor());
             txtPublishingCompany.setText(b.getPublishing_company());
-            dtpPublishingYear.setValue(LocalDate.of(Integer.parseInt((b.getPublishing_year().substring(6, 10))),
-                    Integer.parseInt(b.getPublishing_year().substring(3, 5)),
-                    Integer.parseInt(b.getPublishing_year().substring(0, 2))));
+            
+            int dd_pub = Integer.parseInt(b.getPublishing_year_sub().substring(0, 2));
+            int MM_pub = Integer.parseInt(b.getPublishing_year_sub().substring(3, 5));
+            int yyyy_pub = Integer.parseInt(b.getPublishing_year_sub().substring(6, 10));
+            
+            int dd_Imp = Integer.parseInt(b.getImport_date_sub().substring(0, 2));
+            int MM_Imp = Integer.parseInt(b.getImport_date_sub().substring(3, 5));
+            int yyyy_Imp = Integer.parseInt(b.getImport_date_sub().substring(6, 10));
+            
+            dtpPublishingYear.setValue(LocalDate.of(yyyy_pub, MM_pub, dd_pub));
 
-            dtpImportDate.setValue(LocalDate.of(Integer.parseInt((b.getImport_date().substring(6, 10))),
-                    Integer.parseInt(b.getImport_date().substring(3, 5)),
-                    Integer.parseInt(b.getImport_date().substring(0, 2))));
+            dtpImportDate.setValue(LocalDate.of(yyyy_Imp, MM_Imp, dd_Imp));
             
             txtLocation.setText(b.getLocation());
         }
@@ -149,23 +157,25 @@ public class ManagementBookController implements Initializable {
     
     public void addHandler(ActionEvent event) throws SQLException, ParseException {
         try{
-            SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
-            
+            SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");
+
             String book_name = Utils.removeWhitespace(this.txtBookName.getText());
             String description = Utils.removeWhitespace(this.txtDescription.getText());
             String publishing_company = Utils.removeWhitespace(this.txtPublishingCompany.getText());
             
             String ngay1 = this.dtpPublishingYear.getValue().toString();
-            Date ngayXB = f.parse(ngay1);
-            java.sql.Date publishing_year = new java.sql.Date(ngayXB.getTime());
-            
+//            Date ngayXB = f.parse(ngay1);
+            java.sql.Date publishing_year = new java.sql.Date(f.parse(ngay1).getTime());
+
             String ngay2 = this.dtpImportDate.getValue().toString();
-            Date ngayNhap = f.parse(ngay2);
-            java.sql.Date import_date = new java.sql.Date(ngayNhap.getTime());
+            java.sql.Date import_date = new java.sql.Date(f.parse(ngay2).getTime()) ;
             
             String location = Utils.removeWhitespace(this.txtLocation.getText());
             String category = Utils.removeWhitespace(this.txtCategory.getText());
             String author = Utils.removeWhitespace(this.txtAuthor.getText());
+            
+            String d1 = this.dtpPublishingYear.getValue().toString();
+            String d2 = this.dtpImportDate.getValue().toString();
             
             if (book_name == null || book_name.equals(""))
                 lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
@@ -173,8 +183,11 @@ public class ManagementBookController implements Initializable {
                 lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
             else if (author == null || author.equals(""))
                 lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
+            else if (soSanhNgay(d1, d2) > 0)
+                lbMess.setText("Chọn lại!! Giá trị ngày nhập không được trước ngày XB sách!!!");
             else {
                 Book b = new Book(book_name, description, publishing_company, import_date, location, publishing_year, category, author);
+                System.out.println( b);
                 BookModify bm = new BookModify();
                 bm.AddBook(b);
                 loadTableData(null);
@@ -182,7 +195,7 @@ public class ManagementBookController implements Initializable {
                 resetBook();
             }
         }catch (NumberFormatException ex2){
-                lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
+                lbMess.setText("Bạn phải điền đủ các cột dữ liệu!!");
         }
    }
     
@@ -190,7 +203,7 @@ public class ManagementBookController implements Initializable {
         Book b = this.tbBooks.getSelectionModel().getSelectedItem();
         if (b != null){
             try{
-                SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");
                 
                 int book_id = b.getBook_id();
                 String book_name = Utils.removeWhitespace(this.txtBookName.getText());
@@ -208,6 +221,9 @@ public class ManagementBookController implements Initializable {
                 java.sql.Date import_date = new java.sql.Date(ngayNhap.getTime());
                 
                 String location = Utils.removeWhitespace(this.txtLocation.getText());
+                
+                String d1 = this.dtpPublishingYear.getValue().toString();
+                String d2 = this.dtpImportDate.getValue().toString();
 
                 if (book_name == null || book_name.equals(""))
                     lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
@@ -215,6 +231,8 @@ public class ManagementBookController implements Initializable {
                     lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
                 else if (author == null || author.equals(""))
                     lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
+                else if (soSanhNgay(d1, d2) > 0)
+                    lbMess.setText("Chọn lại!! Giá trị ngày nhập không được trước ngày XB sách!!!");
                 else {
                     BookModify bm = new BookModify();
                     bm.UpdateBook(book_id, book_name, description, publishing_company, import_date, location, publishing_year, category, author);
@@ -223,7 +241,7 @@ public class ManagementBookController implements Initializable {
                     resetBook();
                 }
             }catch (NumberFormatException ex2){
-                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
+                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu!!!");
             }
         }
         else
@@ -257,5 +275,45 @@ public class ManagementBookController implements Initializable {
         this.txtLocation.setText("");
     }
     
+    public static long soSanhNgay(String d1, String d2) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = format.parse(d1);
+        Date date2 = format.parse(d2);
+        
+        int result = date1.compareTo(date2);
+        
+        return result;
+    }
+    
+    private class MaxDateCell extends DateCell {
+
+        private ObjectProperty<LocalDate> date;
+
+        private MaxDateCell(ObjectProperty<LocalDate> date) {
+            this.date = date;
+        }
+
+        @Override
+        public void updateItem(LocalDate item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item.isAfter(date.get())) {
+                this.setDisable(true);
+                setStyle("-fx-background-color: #7e7e7e;"); // I used a different coloring to see which are disabled.
+            }
+        }
+
+    }
+    
+    private void DayLimit(){
+        this.dtpPublishingYear.setDayCellFactory(cf -> {
+            DatePicker dayNow = new DatePicker();
+            String date = LocalDate.now().toString();
+            int d = 0, m = 0, y = 0;
+            dayNow.setValue(Utils.getPreviousDay(date, d, m, y));
+            dtpPublishingYear.setValue(Utils.getPreviousDay(date, d, m, y));
+            return new MaxDateCell(dayNow.valueProperty());
+        });
+    }
+  
 
 }

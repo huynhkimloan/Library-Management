@@ -9,20 +9,10 @@ package com.nhom2.librarymanagement;
 import com.nhom2.pojo.Department;
 import com.nhom2.pojo.Reader;
 import com.nhom2.services.management.DepartmentLoad;
-//import com.nhom2.services.management.CardLoad;
-//import com.nhom2.services.management.DepartmentLoad;
 import com.nhom2.services.management.ReaderModify;
-import com.nhom2.utils.JdbcUtils;
 import com.nhom2.utils.Utils;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -30,14 +20,16 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ObjectProperty;
+//import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
+//import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -60,8 +52,8 @@ public class ManagementReaderController implements Initializable {
     @FXML private TextField txtUsername;
     @FXML private DatePicker dtpBirthDate;
     @FXML private DatePicker dtpActivationDate;
-    @FXML private TextField txtSex;
-    @FXML private TextField txtObject;
+    @FXML private ComboBox<String> cbSex;
+    @FXML private ComboBox<String> cbObject;
     @FXML private ComboBox<Department> cbDepartment;
     @FXML private Label lbMess;
 
@@ -73,6 +65,11 @@ public class ManagementReaderController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        resetReader();
+        DayLimit();
+        
+        initCbObject();
+        initCbSex();
         
         this.loadTableViewReader();
         try {
@@ -88,12 +85,8 @@ public class ManagementReaderController implements Initializable {
             loadTableDataReader(null);
         } catch (SQLException ex) {
             Logger.getLogger(ManagementReaderController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        } 
     }
-    
-    
     
     private void loadTableViewReader(){
         TableColumn colId = new TableColumn("Mã");
@@ -151,25 +144,25 @@ public class ManagementReaderController implements Initializable {
         this.tbReaders.setItems(FXCollections.observableList(r.getReader(reader_name)));
     }
     
-    public void searchHandler(ActionEvent event){
+    public void searchReaderHandler(ActionEvent event){
         try {
             this.loadTableDataReader(this.txtName.getText());
         } catch (SQLException ex) {
             Logger.getLogger(ManagementReaderController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }    
     }
     
-    public void resetHandler(ActionEvent event) {
+    public void resetReaderHandler(ActionEvent event) {
         resetReader();
     }
     
     @FXML
-    private void handleClickTableView(MouseEvent click) throws SQLException{
+    private void handleClickTableViewReader(MouseEvent click) throws SQLException{
         Reader r = tbReaders.getSelectionModel().getSelectedItem();
         if (r!=null) {
             txtName.setText(r.getReader_name());
             txtUsername.setText(r.getUsername());
-            txtSex.setText(r.getSex());
+            cbSex.setValue(r.getSex());
             
             dtpBirthDate.setValue(LocalDate.of(Integer.parseInt((r.getDate_of_birth().substring(6, 10))),
                     Integer.parseInt(r.getDate_of_birth().substring(3, 5)),
@@ -178,7 +171,7 @@ public class ManagementReaderController implements Initializable {
             txtEmail.setText(r.getEmail());
             txtAddress.setText(r.getAddress());
             txtPhone.setText(r.getPhone());
-            txtObject.setText(r.getObject());
+            cbObject.setValue(r.getObject());
             
             int department_id = r.getDepartment_id();
             DepartmentLoad deLoad = new DepartmentLoad();
@@ -193,30 +186,33 @@ public class ManagementReaderController implements Initializable {
     
     private int getDepartmentID(){
         Department depart = this.cbDepartment.getSelectionModel().getSelectedItem();
-        int deID = depart.getDepartment_id();
-        return deID;
+        int department_id = depart.getDepartment_id();
+        return department_id;
     }
     
-    public void editHandler(ActionEvent event) throws SQLException, ParseException {
+    public void editReaderHandler(ActionEvent event) throws SQLException, ParseException {
         Reader r = this.tbReaders.getSelectionModel().getSelectedItem();
         if (r != null){
             try{
-                SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");
                 
                 int reader_id = r.getReader_id();
                 String reader_name = Utils.removeWhitespace(this.txtName.getText());
                 String username = Utils.removeWhitespace(this.txtUsername.getText());
-                String sex = Utils.removeWhitespace(this.txtSex.getText());
+                String sex = Utils.removeWhitespace(this.cbSex.getValue());
 
                 String ngay1 = this.dtpBirthDate.getValue().toString();
                 Date ngaySinh = f.parse(ngay1);
                 java.sql.Date date_of_birth = new java.sql.Date(ngaySinh.getTime());
 
-
                 String email = Utils.removeWhitespace(this.txtEmail.getText());
                 String address = Utils.removeWhitespace(this.txtAddress.getText());
                 String phone = Utils.removeWhitespace(this.txtPhone.getText());
-                String object = Utils.removeWhitespace(this.txtObject.getText());
+                String object = Utils.removeWhitespace(this.cbObject.getValue());
+                
+                String ngay2 = this.dtpActivationDate.getValue().toString();
+                Date ngayKHT = f.parse(ngay2);
+                java.sql.Date activation_date = new java.sql.Date(ngayKHT.getTime());
 
                 if (reader_name == null || reader_name.equals(""))
                     lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
@@ -224,26 +220,31 @@ public class ManagementReaderController implements Initializable {
                     lbMess.setText("Giá trị tên tài khoản bắt buộc nhập!!");
                 else if (email == null || email.equals(""))
                     lbMess.setText("Giá trị email bắt buộc nhập!!");
+
                 else {
                     int department_id = getDepartmentID();
 
                     ReaderModify rm = new ReaderModify();
-                    rm.UpdateReader(reader_id, reader_name, username, sex, date_of_birth, email, address, phone, object, department_id);
+                    rm.UpdateReader(reader_id, reader_name, username, sex, date_of_birth, email, address, phone, object, department_id, activation_date);
                     loadTableDataReader(null);
                     Utils.getBox("Sửa thành công", Alert.AlertType.INFORMATION).show();
-//                    resetBook();
+                    resetReader();
                 }
             }catch (NumberFormatException ex2){
-                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu");
+                    lbMess.setText("Bạn phải điền đủ các cột dữ liệu!!!");
             }
+            
         }
+        else
+            lbMess.setText("Chưa chọn đối tượng để sửa!!!");
     }
     
-    public void deleteHandler(ActionEvent event) throws SQLException {
+    public void deleteReaderHandler(ActionEvent event) throws SQLException {
         Reader r = this.tbReaders.getSelectionModel().getSelectedItem();
   
         if (r != null){
             int reader_id = r.getReader_id();
+            
             ReaderModify bm = new ReaderModify();
             bm.DeleteReader(reader_id);
             loadTableDataReader(null);
@@ -251,22 +252,64 @@ public class ManagementReaderController implements Initializable {
             resetReader();
         }
         else
-            lbMess.setText("Chưa chọn đối tượng để xoá");
+            lbMess.setText("Chưa chọn đối tượng để xoá!!!");
+    }
+    
+    private void initCbObject() {
+        this.cbObject.getItems().add("Sinh viên");
+        this.cbObject.getItems().add("Giảng viên");
+        this.cbObject.getItems().add("Viên chức");
+    }
+    
+    private void initCbSex() {
+        this.cbSex.getItems().add("Nam");
+        this.cbSex.getItems().add("Nữ");
+        this.cbSex.getItems().add("Khác");
     }
     
     private void resetReader(){
         this.lbMess.setText("");
         this.txtName.setText("");
-        this.txtSex.setText("");
         this.txtEmail.setText("");
         this.txtAddress.setText("");
         this.txtPhone.setText("");
-        this.txtObject.setText("");
         this.dtpBirthDate.setValue(LocalDate.now());
+        this.dtpActivationDate.setValue(LocalDate.now());
         this.txtUsername.setText("");
+        this.cbObject.setValue("Sinh viên");
+        this.cbSex.setValue("Nam");
     }
     
+    
+        private class MaxDateCell extends DateCell {
 
+        private ObjectProperty<LocalDate> date;
+
+        private MaxDateCell(ObjectProperty<LocalDate> date) {
+            this.date = date;
+        }
+
+        @Override
+        public void updateItem(LocalDate item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item.isAfter(date.get())) {
+                this.setDisable(true);
+                setStyle("-fx-background-color: #7e7e7e;"); // I used a different coloring to see which are disabled.
+            }
+        }
+
+    }
+    
+    private void DayLimit(){
+        this.dtpBirthDate.setDayCellFactory(cf -> {
+            DatePicker dayNow = new DatePicker();
+            String date = LocalDate.now().toString();
+            int d = 0, m = 0, y = 0;
+            dayNow.setValue(Utils.getPreviousDay(date, d, m, y));
+            dtpBirthDate.setValue(Utils.getPreviousDay(date, d, m, y));
+            return new MaxDateCell(dayNow.valueProperty());
+        });
+    }
 }
 
     

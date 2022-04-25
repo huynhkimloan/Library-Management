@@ -6,7 +6,8 @@
 package com.nhom2.pojo;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
 
 /**
  *
@@ -42,7 +43,8 @@ public class Book {
         this.author = author;      
     }
 
-    public Book(String book_name, String description, String publishing_company, Date import_date, String location, Date publishing_year, String category, String author) {
+    public Book(String book_name, String description, String publishing_company, 
+            Date import_date, String location, Date publishing_year, String category, String author) {
         this.book_name = book_name;
         this.description = description;  
         this.publishing_company = publishing_company;
@@ -52,7 +54,64 @@ public class Book {
         this.category = category;
         this.author = author;
     }
+    
+    /**hàm get_set ManagementBook
+    /**
+     * @return the publishing_year
+     * @throws java.text.ParseException
+     */
+    public String getPublishing_year_default() throws ParseException {
+        SimpleDateFormat f =new SimpleDateFormat ("yyyy-MM-dd");
+        String publishing_date = f.format(getPublishing_year());
+        Date publishing_date_value = new Date(f.parse(publishing_date).getTime());
+        return f.format(publishing_date_value);
+    }
+    
+    public String getPublishing_year_sub() throws ParseException {
+        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
+        String value = f.format(getPublishing_year());
+        return value;
+    }
 
+    /**
+     * @param publishing_year the publishing_year to set
+     */
+    public void setPublishing_year_default(Date publishing_year) throws ParseException {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = format1.format(publishing_year);
+        this.setPublishing_year((Date) format1.parse(date1));
+    }
+    
+    /**
+     * @return the import_date
+     */
+    
+    public String getImport_date_default() throws ParseException {
+        SimpleDateFormat f =new SimpleDateFormat ("yyyy-MM-dd");
+        String date1 = f.format(getImport_date());
+        Date import_date_2 = new Date(f.parse(date1).getTime());
+        return f.format(import_date_2);
+    }
+    
+    
+    public String getImport_date_sub() throws ParseException {
+        SimpleDateFormat f = new SimpleDateFormat ("dd-MM-yyyy");
+        String value = f.format(getImport_date());
+        return value;
+    }
+
+    /**
+     * @param import_date the import_date to set
+     */
+    
+    public void setImport_date_default(Date import_date) throws ParseException {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = format1.format(import_date);
+        this.setImport_date((Date) format1.parse(date1));
+    }
+
+    
+    /**Mặc định
     /**
      * @return the book_id
      */
@@ -109,20 +168,7 @@ public class Book {
         this.publishing_company = publishing_company;
     }
 
-    /**
-     * @return the import_date
-     */
-    public String getImport_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(import_date);
-    }
 
-    /**
-     * @param import_date the import_date to set
-     */
-    public void setImport_date(Date import_date) {
-        this.import_date = import_date;
-    }
 
     /**
      * @return the location
@@ -138,20 +184,7 @@ public class Book {
         this.location = location;
     }
 
-    /**
-     * @return the publishing_year
-     */
-    public String getPublishing_year() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(publishing_year);
-    }
 
-    /**
-     * @param publishing_year the publishing_year to set
-     */
-    public void setPublishing_year(Date publishing_year) {
-        this.publishing_year = publishing_year;
-    }
 
     /**
      * @return the category
@@ -193,6 +226,34 @@ public class Book {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the import_date
+     */
+    public Date getImport_date() {
+        return import_date;
+    }
+
+    /**
+     * @param publishing_year the publishing_year to set
+     */
+    public void setPublishing_year(Date publishing_year) {
+        this.publishing_year = publishing_year;
+    }
+
+    /**
+     * @param import_date the import_date to set
+     */
+    public void setImport_date(Date import_date) {
+        this.import_date = import_date;
+    }
+
+    /**
+     * @return the publishing_year
+     */
+    public Date getPublishing_year() {
+        return publishing_year;
     }
 
    

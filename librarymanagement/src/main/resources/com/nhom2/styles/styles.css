@@ -24,7 +24,7 @@ and open the template in the editor.
     -fx-spacing: 10;
 }
 
-.txt-managementbook Text, TextField, TextArea, DatePicker{
+.txt-managementbook{
     -fx-pref-width: 1000;
 }
 
@@ -44,12 +44,14 @@ Text.title-managementbook {
     -fx-stroke: green;
 }
 
-Lable.lbMess {
-    -fx-fill: red;
+.lbMess {
+    -fx-text-fill: red;
+     -fx-font-style: italic;
+     -fx-alignment: CENTER;
 }
 
 /*ManagementReader*/
-.ManagementReader Text, TextField, ComboBox, DatePicker {
+.ManagementReader {
     -fx-font-size: 20;
     -fx-font-weight: bold;
     -fx-spacing: 15;
@@ -66,5 +68,7 @@ Text.title-managementreader {
 
 .txt-managementreader {
     -fx-pref-width: 500;
-   
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-spacing: 15;
 }

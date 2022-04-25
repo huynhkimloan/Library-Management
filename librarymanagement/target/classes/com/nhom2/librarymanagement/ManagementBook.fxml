@@ -29,16 +29,16 @@
                      </font></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="65.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Mô tả: " wrappingWidth="204.22695922851562" />
-                  <TextArea fx:id="txtDescription" prefHeight="22.0" prefWidth="817.0" promptText="Nhập mô tả..." styleClass="txt-managementbook">
+                  <TextArea fx:id="txtDescription" prefHeight="47.0" prefWidth="691.0" promptText="Nhập mô tả..." styleClass="txt-managementbook">
                      <font>
                         <Font size="9.0" />
                      </font></TextArea>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="40.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Loại sách:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtCategory" promptText="Nhập loại sách..." styleClass="txt-managementbook">
@@ -47,7 +47,7 @@
                      </font></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="43.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Tác giả:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtAuthor" promptText="Nhập tác giả..." styleClass="txt-managementbook">
@@ -56,7 +56,7 @@
                      </font></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="45.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Nhà xuất bản:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtPublishingCompany" promptText="Nhập nhà xuất bản..." styleClass="txt-managementbook">
@@ -65,19 +65,19 @@
                      </font></TextField>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="38.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Năm xuất bản:" wrappingWidth="204.22695922851562" />
                   <DatePicker fx:id="dtpPublishingYear" accessibleRole="TEXT_FIELD" prefHeight="32.0" prefWidth="614.0" promptText="Chọn năm xuất bản..." styleClass="txt-managementbook" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+            <HBox prefHeight="55.0" prefWidth="906.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Ngày nhập sách vào:" wrappingWidth="204.22695922851562" />
                   <DatePicker fx:id="dtpImportDate" prefHeight="32.0" prefWidth="614.0" promptText="Chọn ngày nhập sách..." styleClass="txt-managementbook" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="48.0" prefWidth="906.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Vị trí sách:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtLocation" promptText="Nhập vị trí sách trong thư viện..." styleClass="txt-managementbook">
@@ -92,7 +92,6 @@
    <right>
       <VBox accessibleRole="TEXT_FIELD" onMouseClicked="#handleClickTableView" prefHeight="538.0" prefWidth="325.0" styleClass="ManagementBook" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lbMess" styleClass="lbMess" />
             <Button layoutX="42.0" layoutY="204.0" mnemonicParsing="false" onAction="#searchHandler" styleClass="btn-managementbook" text="TÌM KIẾM" />
             <Button mnemonicParsing="false" onAction="#addHandler" styleClass="btn-managementbook" text="THÊM" />
             <Button mnemonicParsing="false" onAction="#editHandler" styleClass="btn-managementbook" text="SỬA" />
@@ -103,9 +102,10 @@
       </VBox>
    </right>
    <bottom>
-      <Pane prefHeight="193.0" prefWidth="1290.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="246.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView id="tbBooks" fx:id="tbBooks" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#handleClickTableView" prefHeight="193.0" prefWidth="1280.0" />
+            <Label fx:id="lbMess" prefHeight="30.0" prefWidth="1279.0" styleClass="lbMess" />
+            <TableView id="tbBooks" fx:id="tbBooks" layoutY="43.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#handleClickTableView" prefHeight="203.0" prefWidth="1280.0" />
          </children>
       </Pane>
    </bottom>

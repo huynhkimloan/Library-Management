@@ -5,7 +5,6 @@
  */
 package com.nhom2.services.management;
 
-import com.nhom2.pojo.Department;
 import com.nhom2.pojo.Reader;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
@@ -27,9 +26,9 @@ public class ReaderModify {
 
             String sql = "SELECT r.*, c.activation_date, d.department_id \n" +
                         "FROM reader r, card c, department d \n" +
-                        "WHERE r.reader_id=c.card_id and r.department_id=d.department_id";
+                        "WHERE r.reader_id=c.card_id and r.department_id=d.department_id ";
             if (reader_name != null && !reader_name.isEmpty())
-                sql += " WHERE reader_name like concat('%', ?, '%')";
+                sql += " and reader_name like concat('%', ?, '%')";
             
             PreparedStatement stm = conn.prepareStatement(sql);
             if (reader_name != null && !reader_name.isEmpty())
@@ -51,13 +50,16 @@ public class ReaderModify {
         return readers;
     }
      
-    public void UpdateReader(int reader_id, String reader_name, String username, String sex, Date date_of_birth, String email, String address, String phone, String object, int department_id) throws SQLException{
+    public void UpdateReader(int reader_id, String reader_name, String username, String sex, Date date_of_birth, String email, String address, String phone, String object, int department_id, Date activation_date) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
+            //Reader
             String sql = "UPDATE reader SET reader_name = ?, username = ?, "
                     + " sex = ?, date_of_birth = ?, "
-                    + " email =?, address = ?, phone = ?, object = ?, department_id = ? "
+                    + " email = ?, address = ?, phone = ?, object = ?, department_id = ? "
                     + " WHERE (reader_id = ?);";
             PreparedStatement stm = conn.prepareStatement(sql);
+            
+            stm.setString(1, reader_name);
             stm.setString(2, username);
             stm.setString(3, sex);
             stm.setDate(4, date_of_birth);
@@ -69,16 +71,35 @@ public class ReaderModify {
             stm.setInt(10, reader_id);
             
             stm.executeUpdate();
+            
+            //Card
+            int card_id = reader_id;
+            String sql2 = "UPDATE card SET activation_date = ? WHERE (card_id = ?);";
+            PreparedStatement stm2 = conn.prepareStatement(sql2);
+            stm2.setDate(1, activation_date);
+            stm2.setInt(2, card_id);
+            
+            stm2.executeUpdate();
         }
     }
      
     public void DeleteReader(int reader_id) throws SQLException{
         try(Connection conn = JdbcUtils.getConn()){
-            String sql = "DELETE FROM book WHERE (reader_id = ?);";
+            //Card
+            int card_id = reader_id;
+            String sql = "DELETE FROM card WHERE (card_id = ?);";
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, reader_id);
+            stm.setInt(1, card_id);
             stm.executeUpdate();
+            
+            //Reader
+            String sql2 = "DELETE FROM reader WHERE (reader_id = ?);";
+            PreparedStatement stm2 = conn.prepareStatement(sql2);
+            stm2.setInt(1, reader_id);
+            stm2.executeUpdate();
         }
     }
+    
+    
 
 }
