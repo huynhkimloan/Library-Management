@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" styleClass="ManagementBook" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.ManagementBookController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-managementbook" text="Quản lý Sách" wrappingWidth="218.197265625" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox prefHeight="538.0" prefWidth="926.0" styleClass="ManagementBook" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="43.0" prefWidth="786.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Tên sách: " wrappingWidth="204.22695922851562" />
+                  <TextField fx:id="txtBookName" promptText="Nhập tên sách..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Mô tả: " wrappingWidth="204.22695922851562" />
+                  <TextArea fx:id="txtDescription" prefHeight="22.0" prefWidth="817.0" promptText="Nhập mô tả..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextArea>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Loại sách:" wrappingWidth="204.22695922851562" />
+                  <TextField fx:id="txtCategory" promptText="Nhập loại sách..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Tác giả:" wrappingWidth="204.22695922851562" />
+                  <TextField fx:id="txtAuthor" promptText="Nhập tác giả..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Nhà xuất bản:" wrappingWidth="204.22695922851562" />
+                  <TextField fx:id="txtPublishingCompany" promptText="Nhập nhà xuất bản..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Năm xuất bản:" wrappingWidth="204.22695922851562" />
+                  <DatePicker fx:id="dtpPublishingYear" accessibleRole="TEXT_FIELD" prefHeight="32.0" prefWidth="614.0" promptText="Chọn năm xuất bản..." styleClass="txt-managementbook" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="hbox-manabook">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Ngày nhập sách vào:" wrappingWidth="204.22695922851562" />
+                  <DatePicker fx:id="dtpImportDate" prefHeight="32.0" prefWidth="614.0" promptText="Chọn ngày nhập sách..." styleClass="txt-managementbook" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Vị trí sách:" wrappingWidth="204.22695922851562" />
+                  <TextField fx:id="txtLocation" promptText="Nhập vị trí sách trong thư viện..." styleClass="txt-managementbook">
+                     <font>
+                        <Font size="9.0" />
+                     </font></TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox accessibleRole="TEXT_FIELD" onMouseClicked="#handleClickTableView" prefHeight="538.0" prefWidth="325.0" styleClass="ManagementBook" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbMess" styleClass="lbMess" />
+            <Button layoutX="42.0" layoutY="204.0" mnemonicParsing="false" onAction="#searchHandler" styleClass="btn-managementbook" text="TÌM KIẾM" />
+            <Button mnemonicParsing="false" onAction="#addHandler" styleClass="btn-managementbook" text="THÊM" />
+            <Button mnemonicParsing="false" onAction="#editHandler" styleClass="btn-managementbook" text="SỬA" />
+            <Button mnemonicParsing="false" onAction="#deleteHandler" styleClass="btn-managementbook" text="XÓA" />
+            <Button layoutX="98.0" layoutY="198.0" mnemonicParsing="false" onAction="#resetHandler" styleClass="btn-managementbook" text="THIẾT LẬP LẠI" />
+            <Button layoutX="73.0" layoutY="385.0" mnemonicParsing="false" styleClass="btn-managementbook" text="QUAY LẠI" />
+         </children>
+      </VBox>
+   </right>
+   <bottom>
+      <Pane prefHeight="193.0" prefWidth="1290.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView id="tbBooks" fx:id="tbBooks" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#handleClickTableView" prefHeight="193.0" prefWidth="1280.0" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>
