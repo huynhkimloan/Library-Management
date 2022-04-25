@@ -21,6 +21,6 @@ public class JdbcUtils {
     }
     
     public static Connection getConn() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost/ktpm_qltv", "root", "12345678");
+        return DriverManager.getConnection("jdbc:mysql://localhost/ktpm_qltv", "root", "2107");
     }
 }
