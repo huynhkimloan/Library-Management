@@ -6,7 +6,7 @@
 package com.nhom2.librarymanagement;
 
 import com.nhom2.pojo.BorrowBook;
-import com.nhom2.services.ReturnService;
+import com.nhom2.services.ReturnBorowService;
 import com.nhom2.utils.JdbcUtils;
 import com.nhom2.utils.Utils;
 import java.io.IOException;
@@ -69,7 +69,6 @@ public class ReturnBookController implements Initializable {
     private static String id;
     Statement stm = null;
     ResultSet rs = null;
-    ObservableList<BorrowBook> bList = FXCollections.observableArrayList();
     
     /**
      * Initializes the controller class.
@@ -88,7 +87,7 @@ public class ReturnBookController implements Initializable {
     }
         
     private void loadTableData(String kw) {
-        ReturnService s = new ReturnService();
+        ReturnBorowService s = new ReturnBorowService();
         try {
             this.tbData.setItems(FXCollections.observableList(s.getReturn(kw)));
         } catch (SQLException ex) {
@@ -152,6 +151,7 @@ public class ReturnBookController implements Initializable {
         txtStatus.setText(null);
         dpkStart_date.setValue(null);
         dpkEnd_date.setValue(null);
+        txtKw.setText(null);
     }
     
     @FXML
@@ -163,7 +163,7 @@ public class ReturnBookController implements Initializable {
     @FXML
     private void restore() throws ParseException{
         id = txtBorrow_id.getText();
-        int fees = (int) (ReturnService.daysDiff(dpkStart_date.getValue().toString(),
+        int fees = (int) (ReturnBorowService.daysDiff(dpkStart_date.getValue().toString(),
                 dpkEnd_date.getValue().toString()));
         if (fees < 0) {
             Utils.getBox("Vui lòng chọn ngày hợp lệ", Alert.AlertType.WARNING).show();

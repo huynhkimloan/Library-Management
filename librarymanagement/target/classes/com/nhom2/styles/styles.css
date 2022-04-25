@@ -87,7 +87,7 @@ VBox.Statistical {
     -fx-spacing: 10;
 }
 
-.txt-managementbook Text, TextField, TextArea, DatePicker{
+.txt-managementbook{
     -fx-pref-width: 1000;
 }
 
@@ -183,7 +183,7 @@ Lable.lbMess {
     -fx-spacing: 10;
 }
 
-.txt-managementbook Text, TextField, TextArea, DatePicker{
+.txt-managementbook{
     -fx-pref-width: 1000;
 }
 

@@ -5,7 +5,7 @@
  */
 package com.nhom2.librarymanagement;
 
-import com.nhom2.services.ReturnService;
+import com.nhom2.services.ReturnBorowService;
 import com.nhom2.utils.JdbcUtils;
 import com.nhom2.utils.Utils;
 import java.net.URL;
@@ -83,9 +83,9 @@ public class PaymentController implements Initializable {
                 txtName.setText(rs.getString("reader_name"));
                 txtStartDate.setText(rs.getDate("start_date").toString());
                 txtEndDate.setText(rs.getDate("end_date").toString());
-                txtDays.setText(String.valueOf(ReturnService.daysDiff(rs.getDate
+                txtDays.setText(String.valueOf(ReturnBorowService.daysDiff(rs.getDate
                     ("start_date").toString(),rs.getDate("end_date").toString())));
-                txtFineDays.setText(String.valueOf(ReturnService.daysDiff(rs.getDate
+                txtFineDays.setText(String.valueOf(ReturnBorowService.daysDiff(rs.getDate
                     ("start_date").toString(),rs.getDate("end_date").toString())-30));
                 txtTotalMoney.setText(String.valueOf(String.format("%.3f",rs.getFloat("fine"))));
             }

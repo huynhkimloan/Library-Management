@@ -5,6 +5,7 @@ com\nhom2\services\Signin_out.class
 com\nhom2\librarymanagement\ReaderHomeController.class
 com\nhom2\pojo\Reader.class
 com\nhom2\pojo\Card.class
+com\nhom2\librarymanagement\BorrowBookController.class
 com\nhom2\services\management\BookModify.class
 com\nhom2\utils\Utils.class
 module-info.class
@@ -12,10 +13,10 @@ com\nhom2\librarymanagement\ReturnBookController.class
 com\nhom2\services\management\ReaderModify.class
 com\nhom2\librarymanagement\PaymentController.class
 com\nhom2\services\Payment.class
-com\nhom2\services\ReturnService.class
 com\nhom2\pojo\Book.class
 com\nhom2\pojo\BorrowBook.class
 com\nhom2\pojo\Department.class
+com\nhom2\services\ReturnBorowService.class
 com\nhom2\librarymanagement\ManagementBookController.class
 com\nhom2\pojo\ReserveBook.class
 com\nhom2\librarymanagement\ManagementReaderController.class

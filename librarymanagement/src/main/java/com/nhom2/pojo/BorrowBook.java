@@ -53,7 +53,25 @@ public class BorrowBook {
         this.fine = fine;
         this.status = status;
     }
-
+    
+    public BorrowBook(int borrow_id, int card_id, int book_id, 
+            Date start_date, int amount, int status)
+    {
+        this.borrow_id = borrow_id;
+        this.card_id = card_id;
+        this.book_id = book_id;
+        this.start_date = start_date;
+        this.amount = amount;
+        this.status = status;
+    }
+    
+    public BorrowBook(Date start_date, int amount, int card_id, int book_id)
+    {
+        this.card_id = card_id;
+        this.book_id = book_id;
+        this.start_date = start_date;
+        this.amount = amount;
+    }
 
     /**
      * @return the borrow_id
@@ -101,8 +119,8 @@ public class BorrowBook {
      * @return the start_date
      */
     public String getStart_date() {
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        return df.format(start_date);
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        return f.format(start_date);
     }
 
     /**
