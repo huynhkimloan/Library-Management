@@ -22,6 +22,7 @@ public class Signin_upController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+	//PHAMMTHIDIEUQUE
     }    
     
 }
