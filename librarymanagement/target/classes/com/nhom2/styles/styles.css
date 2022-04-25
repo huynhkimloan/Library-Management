@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 21, 2022, 5:31:17 PM
+    Author     : ASUS
+*/
+
+*
+{
+    -fx-font-family: Tahoma;
+    -fx-font-size: 13;
+}
+AnchorPane
+{
+    -fx-background-color: white;
+}
+
+Text.Subject
+{
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-fill: black;
+    -fx-stroke: #7b6b5e;
+    -fx-stroke-width: 1.5;
+    
+}
+
+Text.Main
+{
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-align: CENTER;
+}
+
+Pane.Border
+{
+    -fx-background-color: #7b6b5e;
+}
+
+Button.Special
+{
+    -fx-background-color: bisque;
+    -fx-font-weight: bold;
+}
+
+Button.Normal
+{
+    -fx-background-color: lightcyan;
+    -fx-font-weight: bold;
+}
+
+Button.Common
+{
+    -fx-background-color: #00E676;
+    -fx-font-weight: bold;
+}
+
+TextField.Money
+{
+    -fx-fill: #00E676;
+}
