@@ -50,6 +50,7 @@ VBox.Statistical {
 .Statistical Label {
     -fx-background-color: white;
     -fx-alignment: CENTER;
+     -fx-font-size: 17;
 }
 
 .chuaTraSach {
@@ -64,6 +65,7 @@ VBox.Statistical {
 
 .title {
     -fx-aligment: CENTER;
+    -fx-font-size: 25;
     
 }
 

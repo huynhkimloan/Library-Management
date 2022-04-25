@@ -26,7 +26,7 @@
       </Text>
       <HBox alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="475.0">
          <children>
-            <TextField fx:id="tfNam" alignment="BASELINE_RIGHT" prefHeight="33.0" prefWidth="167.0" promptText="Nhập Năm..." styleClass="NhapNam">
+            <TextField fx:id="tfNam" alignment="BASELINE_RIGHT" onKeyPressed="#hanCheNhapChu" prefHeight="33.0" prefWidth="167.0" promptText="Nhập Năm..." styleClass="NhapNam">
                <font>
                   <Font size="15.0" />
                </font></TextField>

@@ -6,21 +6,24 @@
 package com.nhom2.librarymanagement;
 
 import com.nhom2.services.Statistical;
+import com.nhom2.utils.Utils;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -48,11 +51,16 @@ public class StatisticalController implements Initializable {
 //        String a ="Tổng số lượng sách được mượn trong năm là " ;
         Statistical s = new Statistical();     
         if(tfNam.getText() != null)
-            try {
-                this.lbBorrow.setText(s.sachMuonTheoNam(tfNam.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+            else
+                try {
+                    this.lbBorrow.setText(s.sachMuonTheoNam(Utils.removeWhitespace(tfNam.getText())));
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         else
             lbBorrow.setText("Bạn cần phải nhập năm !!!");
             
@@ -64,13 +72,18 @@ public class StatisticalController implements Initializable {
 //        if(tfNam.getText() == null || s == null)
 //            lbBorrow.setText("Qúy 1 độc giả chưa mượn sách");           
         if(tfNam.getText() != null)
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+            else
             try {
-                this.lbBorrow.setText(s.sachMuonTheoQuy1(tfNam.getText()));
+                 this.lbBorrow.setText(s.sachMuonTheoQuy1(Utils.removeWhitespace(tfNam.getText())));
             } catch (SQLException ex) {
-                Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        else
-            lbBorrow.setText("Bạn cần phải nhập năm !!!");
+                    Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            else
+                lbBorrow.setText("Bạn cần phải nhập năm !!!");
             
     }
     
@@ -78,11 +91,16 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được mượn trong quý 2 là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            try {
-                this.lbBorrow.setText(s.sachMuonTheoQuy2(tfNam.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+            else   
+                try {                   
+                        this.lbBorrow.setText(s.sachMuonTheoQuy2(Utils.removeWhitespace(tfNam.getText())));
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         else
             lbBorrow.setText("Bạn cần phải nhập năm !!!");
     }
@@ -91,11 +109,16 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được mượn trong quý 3 là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            try {
-                this.lbBorrow.setText(s.sachMuonTheoQuy3(tfNam.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+            else 
+                try {                
+                        this.lbBorrow.setText(s.sachMuonTheoQuy3(Utils.removeWhitespace(tfNam.getText())));
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         else
             lbBorrow.setText("Bạn cần phải nhập năm !!!");
     }
@@ -105,7 +128,12 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                this.lbBorrow.setText(s.sachMuonTheoQuy4(tfNam.getText()));
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))         
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+                else
+                    this.lbBorrow.setText(s.sachMuonTheoQuy4(Utils.removeWhitespace(tfNam.getText())));
             } catch (SQLException ex) {
                 Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -118,7 +146,12 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                this.lbPay.setText(s.sachTraTheoQuy1(tfNam.getText()));
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))            
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+                else
+                    this.lbPay.setText(s.sachTraTheoQuy1(Utils.removeWhitespace(tfNam.getText())));
             } catch (SQLException ex) {
                 Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -131,7 +164,12 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)   
             try {
-                    this.lbPay.setText(s.sachTraTheoQuy2(tfNam.getText()));
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))          
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+                else
+                    this.lbPay.setText(s.sachTraTheoQuy2(Utils.removeWhitespace(tfNam.getText())));
                 } catch (SQLException ex) {
                     Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -144,7 +182,12 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                this.lbPay.setText(s.sachTraTheoQuy3(tfNam.getText()));
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))          
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+                else
+                    this.lbPay.setText(s.sachTraTheoQuy3(Utils.removeWhitespace(tfNam.getText())));
             } catch (SQLException ex) {
                 Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -157,7 +200,12 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                this.lbPay.setText(s.sachTraTheoQuy4(tfNam.getText()));
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))       
+                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                            + "và năm phải lớn hơn năm 1970 "
+                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+                else
+                    this.lbPay.setText(s.sachTraTheoQuy4(Utils.removeWhitespace(tfNam.getText())));
             } catch (SQLException ex) {
                 Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,11 +217,16 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được trả trong năm là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            try {
-                this.lbPay.setText(s.sachTraTheoNam(tfNam.getText()));
-            } catch (SQLException ex) {
-                Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+                   Utils.getBox("Bạn phải nhập năm gồm 4 số "
+                           + "và năm phải lớn hơn năm 1970 "
+                           + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
+            else
+                try {
+                        this.lbPay.setText(s.sachTraTheoNam(Utils.removeWhitespace(tfNam.getText())));
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         else
             lbBorrow.setText("Bạn cần phải nhập năm !!!");
     }
@@ -214,11 +267,22 @@ public class StatisticalController implements Initializable {
     public void reset1Handler(ActionEvent event) {
          resetBorrowPay();
     }
-     
+    @FXML 
+    private void hanCheNhapChu(KeyEvent keyEvent) {
+        this.tfNam.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (!newValue.matches("\\d*")) {
+            tfNam.setText(newValue.replaceAll("[^\\d]", ""));
+        }
+    });
+    }
+    @FXML 
     private void resetBorrowPay(){
         this.lbBorrow.setText("");
         this.lbPay.setText("");
         this.tfNam.setText("");
        // this.tbChuaTraSach.setValue(LocalDate.now());
     }
+//    private void txtNoiDungActionPerformed(ActionEvent event) {
+//        this.requestFocus();
+//    }
 }
