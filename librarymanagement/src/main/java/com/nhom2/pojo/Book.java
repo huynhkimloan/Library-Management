@@ -25,7 +25,6 @@ public class Book {
     private Date publishing_year;
     private String category;
     private String author;
-
     private CheckBox select;
     
     public Book() {
@@ -67,7 +66,8 @@ public class Book {
 //    }
     
     
-    public Book(String book_name, String category, String author, String description, String publishing_company, Date publishing_year) {
+    public Book(String book_name, String category, String author, 
+            String description, String publishing_company, Date publishing_year) {
        
         this.book_name = book_name;
         this.category = category;
