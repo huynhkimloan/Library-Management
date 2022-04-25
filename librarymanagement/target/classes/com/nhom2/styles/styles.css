@@ -50,6 +50,7 @@ VBox.Statistical {
 .Statistical Label {
     -fx-background-color: white;
     -fx-alignment: CENTER;
+     -fx-font-size: 17;
 }
 
 .chuaTraSach {
@@ -64,6 +65,7 @@ VBox.Statistical {
 
 .title {
     -fx-aligment: CENTER;
+    -fx-font-size: 25;
     
 }
 
@@ -282,4 +284,14 @@ Button.Common
 TextField.Money
 {
     -fx-fill: #00E676;
+}
+
+GridPane.grpSignIn, GridPane.grpSignUp, .vboxSearch, .tbBook {
+    -fx-background-color: white;
+}
+
+Button.btnSignIn, Button.btnSignUp, Button.btnReturn, Button.btnReserve {
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
+    /*-fx-font-weight: bold;*/
 }

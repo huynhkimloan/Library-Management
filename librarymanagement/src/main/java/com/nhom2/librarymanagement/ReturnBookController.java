@@ -125,9 +125,9 @@ public class ReturnBookController implements Initializable {
             dpkEnd_date.setValue(null);
             BorrowBook ls = tbData.getItems().get(tbData.getSelectionModel().getSelectedIndex());
             txtBorrow_id.setText(String.valueOf(ls.getBorrow_id()));
-            dpkStart_date.setValue(LocalDate.of(Integer.parseInt((ls.getStart_date().substring(6, 10))),
-                    Integer.parseInt(ls.getStart_date().substring(3, 5)), 
-                    Integer.parseInt(ls.getStart_date().substring(0, 2))));
+            dpkStart_date.setValue(LocalDate.of(Integer.parseInt((ls.getStart_date().substring(0, 4))),
+                    Integer.parseInt(ls.getStart_date().substring(5, 7)), 
+                    Integer.parseInt(ls.getStart_date().substring(8, 10))));
             txtAmount.setText(String.valueOf(ls.getAmount()));
             txtCard_id.setText(String.valueOf(ls.getCard_id()));
             txtBook_id.setText(String.valueOf(ls.getBook_id()));

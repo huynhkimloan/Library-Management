@@ -30,7 +30,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -78,7 +77,8 @@ public class BorrowBookController implements Initializable {
         ObservableList<String> list = FXCollections.observableArrayList("1", "2", "3", "4", "5");
         cbAmount.setItems(list);
         txtKw.textProperty().addListener((evt) -> {
-                this.loadTableData(txtKw.getText());
+            nullSomeThing();
+            this.loadTableData(txtKw.getText());
         });
         setCellValue();
     } 

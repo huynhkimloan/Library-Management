@@ -65,13 +65,6 @@ public class BorrowBook {
         this.status = status;
     }
     
-    public BorrowBook(Date start_date, int amount, int card_id, int book_id)
-    {
-        this.card_id = card_id;
-        this.book_id = book_id;
-        this.start_date = start_date;
-        this.amount = amount;
-    }
 
     /**
      * @return the borrow_id

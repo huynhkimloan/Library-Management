@@ -20,6 +20,7 @@ public class Reader {
     private String password;
     private String sex;
     private Date date_of_birth;
+    private Date date_of_birth2;
     private String email;
     private String address;
     private String phone;
@@ -81,6 +82,34 @@ public class Reader {
         this.department_id = department_id;
         this.activation_date = activation_date;
     }
+    
+    public Reader(int reader_id, String reader_name, 
+            String username, String password, 
+            String email, boolean active, int department_id) {
+        this.reader_id = reader_id;
+        this.reader_name = reader_name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+        this.department_id = department_id;
+    }
+
+    public Reader(String reader_name, String username, String password, String email, boolean active, int department_id, String sex, String phone, String address, String object, String user_role, Date date_of_birth) {
+        this.reader_name = reader_name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.active = active;
+        this.department_id = department_id;
+        this.sex = sex;
+        this.phone = phone;
+        this.address = address;
+        this.object = object;
+        this.user_role = user_role;
+        this.date_of_birth = date_of_birth;
+    }
+    
 
     /**
      * @return the reader_id
@@ -292,6 +321,20 @@ public class Reader {
      */
     public void setActivation_date(Date activation_date) {
         this.activation_date = activation_date;
+    }
+
+    /**
+     * @return the date_of_birth2
+     */
+    public Date getDate_of_birth2() {
+        return date_of_birth2;
+    }
+
+    /**
+     * @param date_of_birth2 the date_of_birth2 to set
+     */
+    public void setDate_of_birth2(Date date_of_birth2) {
+        this.date_of_birth2 = date_of_birth2;
     }
   
 }

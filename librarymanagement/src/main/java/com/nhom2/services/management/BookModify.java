@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,17 +50,18 @@ public class BookModify {
         return books;
     }
     
-    public void AddBook(Book b) throws SQLException{        
+    public void AddBook(Book b) throws SQLException, ParseException{        
         try(Connection conn = JdbcUtils.getConn()){
             String sql = "INSERT INTO book (book_name, description, publishing_company, import_date, location, publishing_year, category, author)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement stm = conn.prepareStatement(sql);
+            
             stm.setString(1, b.getBook_name());
             stm.setString(2, b.getDescription());
             stm.setString(3, b.getPublishing_company());
-            stm.setString(4, b.getImport_date());
+            stm.setString(4, b.getImport_date_default());
             stm.setString(5, b.getLocation());
-            stm.setString(6, b.getPublishing_year());
+            stm.setString(6, b.getPublishing_year_default());
             stm.setString(7, b.getCategory());
             stm.setString(8, b.getAuthor());
             
