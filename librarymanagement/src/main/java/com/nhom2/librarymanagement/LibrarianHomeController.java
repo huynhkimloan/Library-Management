@@ -106,4 +106,46 @@ public class LibrarianHomeController implements Initializable {
         }
     }
     
+    @FXML
+    private void pageStatistical (ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Statistical.fxml"));
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+           Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+    }
+    
+    @FXML
+    private void pageReserveDetails (ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ReserveDetails.fxml"));
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+           Logger.getLogger(ReserveDetailsController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+    }
+    
+    @FXML
+    private void pagePayment (ActionEvent event) throws IOException{
+        try {
+            FXMLLoader p = new FXMLLoader(App.class.getResource("Payment.fxml"));
+            Scene sc = new Scene(p.load());
+            Stage s = new Stage();
+            s.setScene(sc);
+            s.initStyle(StageStyle.UTILITY);
+            s.show();
+        } catch (IOException ex) {
+           Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+    }
+    
 }
