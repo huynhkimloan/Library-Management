@@ -47,4 +47,12 @@ public class UtilsTest {
         EmailFormatUtils e = new EmailFormatUtils();
         Assertions.assertEquals(expected, e.validate_Email(email));
     }
+    
+    @ParameterizedTest
+    @CsvSource({"hien01, 2", "admin, 1"})
+    public void getReaderIDTest(String username, int expected) throws SQLException {
+        ReaderServices r = new ReaderServices();
+        Assertions.assertEquals(expected, r.getReaderID(username));
+    }
+    
 }
