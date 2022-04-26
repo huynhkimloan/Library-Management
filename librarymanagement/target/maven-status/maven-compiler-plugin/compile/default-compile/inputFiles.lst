@@ -1,4 +1,5 @@
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\pojo\Reader.java
+C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\services\ReserveDetails.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\services\ReaderServices.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\module-info.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\Signin_upController.java
@@ -23,6 +24,7 @@ C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nho
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\SearchController.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\services\management\DepartmentLoad.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\ReturnBookController.java
+C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\ReserveDetailsController.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\ManagementBookController.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\services\Reserve.java
 C:\Users\ASUS\Desktop\Library-Management\librarymanagement\src\main\java\com\nhom2\librarymanagement\App.java

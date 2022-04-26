@@ -20,7 +20,7 @@
             <HBox prefHeight="43.0" prefWidth="786.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Họ và tên:" wrappingWidth="204.22695922851562" />
-                  <TextField fx:id="txtName" promptText="Nhập họ và tên..." styleClass="txt-managementreader">
+                  <TextField fx:id="txtName" promptText="Nhập họ và tên..." style="-fx-font-size: 20;" styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -42,7 +42,7 @@
             <HBox prefHeight="50.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Email:" wrappingWidth="204.22695922851562" />
-                  <TextField fx:id="txtEmail" promptText="Nhập email..." styleClass="txt-managementreader">
+                  <TextField fx:id="txtEmail" promptText="Nhập email..." style="-fx-font-size: 20;" styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -52,7 +52,7 @@
             <HBox prefHeight="47.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Địa chỉ:" wrappingWidth="204.22695922851562" />
-                  <TextField fx:id="txtAddress" promptText="Nhập địa chỉ..." styleClass="txt-managementreader">
+                  <TextField fx:id="txtAddress" promptText="Nhập địa chỉ..." style="-fx-font-size: 20;" styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -62,7 +62,7 @@
             <HBox prefHeight="48.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Số điện thoại:" wrappingWidth="204.22695922851562" />
-                  <TextField fx:id="txtPhone" promptText="Nhập số điện thoại..." styleClass="txt-managementreader">
+                  <TextField fx:id="txtPhone" promptText="Nhập số điện thoại..." style="-fx-font-size: 20;" styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -84,7 +84,7 @@
             <HBox prefHeight="50.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Tên tài khoản:" wrappingWidth="204.22695922851562" />
-                  <TextField fx:id="txtUsername" promptText="Username..." styleClass="txt-managementreader">
+                  <TextField fx:id="txtUsername" promptText="Username..." style="-fx-font-size: 20;" styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
                      </font>

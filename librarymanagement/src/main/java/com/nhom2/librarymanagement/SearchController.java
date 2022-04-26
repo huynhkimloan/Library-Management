@@ -262,18 +262,25 @@ public class SearchController  implements Initializable {
             
             if(co == 1) {
                 //int card_id = Signin_upController.card_ID; 
-                int book_id = bookID;
+                //int book_id = this.getBookID();
                 int card_id = reserve.getCardIDFromCard(cardID);
-                //int book_id = reserve.getBookIDFromBook(bookID);
+                int book_id = reserve.getBookIDFromBook(bookID);
                 int amount = this.totalBook;                
                 LocalDate localDate = LocalDate.now();
                 int namHienTai = localDate.getYear();
                 int ngayHienTai = localDate.getDayOfMonth();
                 int thangHienTai = localDate.getMonthValue();
-                String s = ngayHienTai + "-" + thangHienTai + "-" + namHienTai;
+                //String s = ngayHienTai + "-" + thangHienTai + "-" + namHienTai;
+                //Date ngayDat = f.parse(s);
+                //java.sql.Date activation_date = new java.sql.Date(ngayDat.getTime());
+               
                 SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");  
-                Date ngayDat = f.parse(s);
-                java.sql.Date activation_date = new java.sql.Date(ngayDat.getTime());
+                
+                
+                
+                java.util.Date d = f.parse(localDate.toString());
+                java.sql.Date activation_date = new java.sql.Date(d.getTime());
+//                java.sql.Date activation_date = new java.sql.Date(ngayDat.getTime());
 
                 int da1 = localDate.getDayOfMonth(); 
                 int ngayHienTai1; 
@@ -292,7 +299,10 @@ public class SearchController  implements Initializable {
                             ngayHienTai1 = da1 +2;
                         else
                             if(da1 == 30)
+                            {
                                 ngayHienTai1 = 1;
+                                thangHienTai++;
+                            }
                             else
                             {
                                 ngayHienTai1 = 2;
@@ -305,7 +315,10 @@ public class SearchController  implements Initializable {
                         if(kt == false)
                         {
                             if(da1 <= 26)
-                            ngayHienTai1 = da1 +2;
+                            {
+                                ngayHienTai1 = da1 +2;
+                                thangHienTai++;
+                            }
                             else if(da1 == 27)
                             ngayHienTai1 = 1;
                             else 
@@ -317,9 +330,12 @@ public class SearchController  implements Initializable {
                         else
                         {
                             if(da1 <= 27)
-                            ngayHienTai1 = da1 +2;
+                                ngayHienTai1 = da1 +2;
                             else if(da1 == 28)
-                            ngayHienTai1 = 1;
+                            {
+                                ngayHienTai1 = 1;
+                                thangHienTai++;
+                            }
                             else 
                             {
                                 ngayHienTai1 = 2;
@@ -332,23 +348,25 @@ public class SearchController  implements Initializable {
                         if(da1 <= 28)
                             ngayHienTai1 = da1 +2;
                         else 
-                            if(da1 == 29)                    
+                            if(da1 == 29)
+                            {
                                 ngayHienTai1 = 1;
+                                thangHienTai++;
+                            }
                             else
                                 ngayHienTai1 = 2;
                                 thangHienTai++;
                 }
-
-
-
-                String s1 = ngayHienTai1 + "-" + thangHienTai + "-" + namHienTai;
-                SimpleDateFormat f1 =new SimpleDateFormat("dd-MM-yyyy");
+                
+                String s1 = namHienTai + "-" + thangHienTai + "-" + ngayHienTai1;
+                
+                //SimpleDateFormat f =new SimpleDateFormat("dd-MM-yyyy");
                 Date ngayHH = f.parse(s1);
 
-                String s2 = f.format(ngayHH);
-                Date a= f1.parse(s2);
+//                String s2 = f.format(ngayHH);
+//                Date a= f1.parse(s2);
 
-                java.sql.Date expiration_date = new java.sql.Date(a.getTime());
+                java.sql.Date expiration_date = new java.sql.Date(ngayHH.getTime());
                 ReserveBook  rb = new ReserveBook(activation_date,expiration_date, amount, card_id, book_id);
                 reserve.datSach(rb);  
                 //Nếu có trên 2 quyển sách thì add thêm tiếp
@@ -364,9 +382,8 @@ public class SearchController  implements Initializable {
     
     
     private int getBookID(){
-        Book depart = this.tb_book.getSelectionModel().getSelectedItem();
-        int bookID = depart.getBook_id();
-        return bookID;
+        return this.tb_book.getSelectionModel().getSelectedItem().getBook_id();
+      
     }
    
     private void initDatsach(){

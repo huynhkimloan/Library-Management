@@ -190,6 +190,31 @@ public class ReturnBorowService {
             return false;
     }
     
+    public Boolean expireTest(String kw) throws ParseException, SQLException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long m = System.currentTimeMillis();
+        Date d = new Date(m);
+        String s = simpleDateFormat.format(d);
+        if(checkCardId(kw).isEmpty())
+            return false;
+        else
+            if(daysDiff(s, getStatus(kw))>0)
+                return true;
+            else
+                return false;
+    }
+    
+    public Boolean manyDaysTest(String d1, String d2) throws ParseException {
+        int fees = (int) daysDiff(d1, d2);
+        if (fees < 0) 
+            return false;
+        else
+            if(fees >= 0 && fees <= 30)
+                return true;
+        else
+                return false;
+    }
+    
 }
 
 

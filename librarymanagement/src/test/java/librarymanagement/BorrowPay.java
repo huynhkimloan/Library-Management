@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nhom2.returnborrowpay;
+package librarymanagement;
 
+import com.nhom2.librarymanagement.BorrowBookController;
 import com.nhom2.pojo.Book;
 import com.nhom2.pojo.BorrowBook;
 import com.nhom2.services.ReturnBorowService;
@@ -24,7 +25,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author ASUS
  */
-public class borrowtest {
+public class BorrowPay {
     private static Connection conn;
     ReturnBorowService r = new ReturnBorowService();
      
@@ -47,7 +48,17 @@ public class borrowtest {
         Assertions.assertEquals(r.daysDiffTest(date1, date2), expected);  
     }
     
+    @ParameterizedTest
+    @CsvSource({"1, false","2, true"})
+    public void isActiveTest(String kw, boolean expected) throws SQLException, ParseException{
+        Assertions.assertEquals(r.expireTest(kw), expected);  
+    }
     
-    
+    @ParameterizedTest
+    @CsvSource({"2022-04-30, 2022-04-27, false","2022-05-01, 2022-05-31, true",
+         "2022-04-20, 2022-04-28, true", "2022-04-26, 2022-08-26, false"})
+    public void daysTest(String d1, String d2, boolean expected) throws ParseException{
+        Assertions.assertEquals(r.manyDaysTest(d1, d2), expected);  
+    }
     
 }

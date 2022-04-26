@@ -9,6 +9,7 @@ import com.nhom2.pojo.Book;
 import com.nhom2.pojo.ReserveBook;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,37 +59,15 @@ public class Reserve {
             String sql = "INSERT INTO reservebook (activation_date, expiration_date, amount, card_id, book_id) "
                     + " VALUES (?, ?, ?, ?, ?)";           
             PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setString(1, reserve.getActivation_date());
-            stm.setString(2, reserve.getExpiration_date());
+            stm.setDate(1, (Date) reserve.getActivation_date());
+            stm.setDate(2, (Date) reserve.getExpiration_date());
             stm.setInt(3, reserve.getAmount());
             stm.setInt(4, reserve.getCard_id());
             stm.setInt(5, reserve.getBook_id());
             stm.executeUpdate();
         }
     }
-    
-//    public void UpdateReserve(Date activation_date, Date expiration_date, int amount, int card_id, int book_id) throws SQLException{
-//        try(Connection conn = JdbcUtils.getConn()){
-//            String sql = "UPDATE reserve SET reader_name = ?, username = ?, "
-//                    + " sex = ?, date_of_birth = ?, "
-//                    + " email = ?, address = ?, phone = ?, object = ?, department_id = ? "
-//                    + " WHERE (reader_id = ?);";
-//            PreparedStatement stm = conn.prepareStatement(sql);
-//            
-//            stm.setString(1, reader_name);
-//            stm.setString(2, username);
-//            stm.setString(3, sex);
-//            stm.setDate(4, date_of_birth);
-//            stm.setString(5, email);
-//            stm.setString(6, address);
-//            stm.setString(7, phone);
-//            stm.setString(8, object);
-//            stm.setInt(9, department_id);
-//            stm.setInt(10, reader_id);
-//            
-//            stm.executeUpdate();
-//        }
-    
+               
     public int getBookIDFromBook(int id) throws SQLException{
         int book_ID = -1;       
         try(Connection conn = JdbcUtils.getConn()){
@@ -123,39 +102,7 @@ public class Reserve {
     }
 }
    
-//    public static void long ngayHetHan() {
-//        LocalDateTime ngayKH = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        String formatted = ngayKH.format(formatter);
-//        
-//        // lấy thời điểm bây giờ:
-//        Calendar c = Calendar.getInstance();
-//        // cộng thêm một ngày:
-//        c.add(Calendar.DAY_OF_YEAR, 2); // ngày mai// Muốn chuyển qua lớp khác như Date chẳng hạn:
-//        Date d = (Date) c.getTime(); // vân vân.    
-//    }
-    
-    
-    
-    //xoá giá trị của ô text
-  
-//    public void datSach(ReserveBook b) throws SQLException{        
-//        try(Connection conn = JdbcUtils.getConn()){
-//            String sql = "INSERT INTO reservebook (book_name, description, publishing_company, import_date, location, publishing_year, category, author)"
-//                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-//            PreparedStatement stm = conn.prepareStatement(sql);
-//            stm.setString(1, b.getBook_name());
-//            stm.setString(2, b.getDescription());
-//            stm.setString(3, b.getPublishing_company());
-//            stm.setString(4, b.getImport_date());
-//            stm.setString(5, b.getLocation());
-//            stm.setString(6, b.getPublishing_year());
-//            stm.setString(7, b.getCategory());
-//            stm.setString(8, b.getAuthor());
-//            
-//            stm.executeUpdate();
-//        }
-//    }
+
 
 
         

@@ -7,6 +7,7 @@ package com.nhom2.librarymanagement;
 
 import com.nhom2.services.Statistical;
 import com.nhom2.utils.Utils;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -16,7 +17,11 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -24,6 +29,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -50,8 +57,11 @@ public class StatisticalController implements Initializable {
     public void muonSachTheoNamHandler(ActionEvent event) {
 //        String a ="Tổng số lượng sách được mượn trong năm là " ;
         Statistical s = new Statistical();     
-        if(tfNam.getText() != null)
-            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+        if(tfNam.getText().isBlank()){
+            Utils.getBox("Vui lòng nhập năm", Alert.AlertType.WARNING).show();  
+        } 
+        else
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)    
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -61,8 +71,6 @@ public class StatisticalController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(StatisticalController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-        else
-            lbBorrow.setText("Bạn cần phải nhập năm !!!");
             
     }
     
@@ -72,7 +80,7 @@ public class StatisticalController implements Initializable {
 //        if(tfNam.getText() == null || s == null)
 //            lbBorrow.setText("Qúy 1 độc giả chưa mượn sách");           
         if(tfNam.getText() != null)
-            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)      
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -91,7 +99,7 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được mượn trong quý 2 là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)      
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -109,7 +117,7 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được mượn trong quý 3 là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)        
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -128,7 +136,7 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))         
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)            
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -146,7 +154,7 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))            
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)                
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -164,7 +172,7 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)   
             try {
-                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))          
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)             
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -182,7 +190,7 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))          
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)              
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -200,7 +208,7 @@ public class StatisticalController implements Initializable {
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
             try {
-                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))       
+                if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)        
                     Utils.getBox("Bạn phải nhập năm gồm 4 số "
                             + "và năm phải lớn hơn năm 1970 "
                             + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -217,7 +225,7 @@ public class StatisticalController implements Initializable {
         //String a ="Tổng số lượng sách được trả trong năm là " ;
         Statistical s = new Statistical();
         if(tfNam.getText() != null)
-            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()))    
+            if (s.check_Nam(tfNam.getText()) == false || s.check_NamHLe(tfNam.getText()) == false)       
                    Utils.getBox("Bạn phải nhập năm gồm 4 số "
                            + "và năm phải lớn hơn năm 1970 "
                            + "và nhỏ hơn năm hiện tại !!!", Alert.AlertType.ERROR).show();
@@ -280,9 +288,20 @@ public class StatisticalController implements Initializable {
         this.lbBorrow.setText("");
         this.lbPay.setText("");
         this.tfNam.setText("");
-       // this.tbChuaTraSach.setValue(LocalDate.now());
+       
     }
-//    private void txtNoiDungActionPerformed(ActionEvent event) {
-//        this.requestFocus();
-//    }
+    @FXML
+    private void btnExit (ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("LibrarianHome.fxml"));
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+           Logger.getLogger(LibrarianHomeController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+    }
+
 }

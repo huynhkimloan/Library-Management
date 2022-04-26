@@ -8,13 +8,10 @@ package com.nhom2.services;
 import com.nhom2.pojo.Reader;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +27,7 @@ public class Statistical {
     int namHienTai = localDate.getYear();
 
     //Bạn đọc chưa trả sách    
+    
     public List<Reader> chuaTraSach() throws SQLException { 
         List<Reader> readers = new ArrayList<>();
         try(Connection conn = JdbcUtils.getConn()) {
@@ -49,29 +47,8 @@ public class Statistical {
     }
     
     
-//    public String sachMuonTheoNam(String nam) throws SQLException {
-//        int year = Integer.parseInt(nam);
-//        LocalDate localDate = LocalDate.now();
-//        int namHienTai = localDate.getYear();
-//        int kq =0;
-//        try(Connection conn = JdbcUtils.getConn()){
-////            String sql = "SELECT amount From borrowbook GROUP BY YEAR(start_date)";
-////            if (nam != null)
-////                sql += "WHERE YEAR(start_date) LIKE CONCAT('%', ?, '%')";
-//            PreparedStatement stm = conn.prepareStatement(sql);                          
-//            if(year > 1970 && year <= namHienTai)
-//                stm.setInt(1, year);
-//            ResultSet rs = stm.executeQuery();
-//            while(rs.next()){
-//                int sc = rs.getInt("amount");
-//                kq += sc;
-//            }
-//        }
-//        String kq2=Integer.toString(kq);
-//
-//        return kq2;
-//
-//    }
+
+
     public String sachMuonTheoNam(String nam) throws SQLException {
         int year = Integer.parseInt(nam);
         int kq =0;                          
@@ -129,10 +106,6 @@ public class Statistical {
             while(rs.next()){
                 int sc = rs.getInt("amount");
                 kq += sc;
-//                Date year = rs.getDate("year");
-//                kq = "Tổng số lượng sách được mượn trong quý 1 của năm " + sc + "      Năm " + year + "\n";
-              
-                //a.add(kq);
             }
         }
         String kq2;
@@ -319,13 +292,6 @@ public class Statistical {
     
 }
 
-  
-
-//    public ResultSet sachTraTheoNam() throws SQLException { 
-//        Statement stm = conn.createStatement();
-//        ResultSet rs = stm.executeQuery("SELECT SUM(amount) AS 'Tổng số lượng sách được trả trong năm', YEAR(start_date) AS 'Năm' From BorrowBook GROUP BY YEAR(end_date)\n");
-//        return rs;
-    //}
 
 
 
