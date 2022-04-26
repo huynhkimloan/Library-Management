@@ -21,10 +21,12 @@ com\nhom2\services\management\BookModify.class
 com\nhom2\librarymanagement\ManagementBookController$MaxDateCell.class
 module-info.class
 com\nhom2\services\management\ReaderModify.class
+com\nhom2\librarymanagement\ReserveDetailsController.class
 com\nhom2\pojo\BorrowBook.class
 com\nhom2\utils\EmailFormatUtils.class
 com\nhom2\librarymanagement\ManagementBookController.class
 com\nhom2\utils\AlertUtils.class
+com\nhom2\services\ReserveDetails.class
 com\nhom2\librarymanagement\Signin_upController.class
 com\nhom2\librarymanagement\LibrarianHomeController.class
 com\nhom2\services\Statistical.class
