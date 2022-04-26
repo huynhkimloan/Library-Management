@@ -5,6 +5,7 @@
  */
 package com.nhom2.services;
 
+import com.nhom2.pojo.Card;
 import com.nhom2.pojo.Reader;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
@@ -145,24 +146,42 @@ public class ReaderServices {
     }
     
     //mật khảu phải chứa chữ hoa, chữ thường & số
-     public static String checkPassword(String str){
-        int upper = 0, lower = 0, number = 0, special = 0;
-
-            for(int i = 0; i < str.length(); i++)
-            {
-                char ch = str.charAt(i);
-                if (ch >= 'A' && ch <= 'Z')
-                    upper++;
-                else if (ch >= 'a' && ch <= 'z')
-                    lower++;
-                else if (ch >= '0' && ch <= '9')
-                    number++;
-                else
-                    special++;
-            }
-        if (upper == 0 || number == 0 || lower == 0)
-            return "Mật khẩu phải bao gồm chữ hoa, chữ thường và số";
-        return "";        
-    }
+//     public static String checkPassword(String str){
+//        int upper = 0, lower = 0, number = 0, special = 0;
+//
+//            for(int i = 0; i < str.length(); i++)
+//            {
+//                char ch = str.charAt(i);
+//                if (ch >= 'A' && ch <= 'Z')
+//                    upper++;
+//                else if (ch >= 'a' && ch <= 'z')
+//                    lower++;
+//                else if (ch >= '0' && ch <= '9')
+//                    number++;
+//                else
+//                    special++;
+//            }
+//        if (upper == 0 || number == 0 || lower == 0)
+//            return "Mật khẩu phải bao gồm chữ hoa, chữ thường và số";
+//        return "";        
+//    }
    
+     
+    // tạo card cho tài khoản vừa tạo
+    public void create_Card(Card c) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            conn.setAutoCommit(false);
+            PreparedStatement stm = conn.prepareStatement("INSERT INTO ktpm_qltv.card "
+                    + "(card_id, active, activation_date, expiration_date, total_money_penalty)"
+                    + "VALUES (?, ?, ?, ?, ?);");
+            stm.setInt(1, c.getCard_id());
+            stm.setBoolean(2, c.isActive());
+            stm.setDate(3, (Date) c.getActivation_date());
+            stm.setDate(4, (Date) c.getExpiration_date());
+            stm.setFloat(5, c.getTotal_money_penatly());
+            stm.executeUpdate();
+            conn.commit();
+        }
+    }
+
 }

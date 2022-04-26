@@ -5,6 +5,7 @@
  */
 package com.nhom2.librarymanagement;
 
+import com.nhom2.pojo.Card;
 import com.nhom2.pojo.Department;
 import com.nhom2.pojo.Reader;
 import com.nhom2.services.DepartmentServices;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -170,6 +172,29 @@ public class SignUpController implements Initializable {
                         r_email, true, r_dedepartment, sex.getValue(), 
                         r_phone, r_add, object.getValue(), "USER", birthdate); 
                 rd.SignUp_Account(reader);
+                
+                
+                //lấy mã độc giả
+                ReaderServices re_service = new ReaderServices();
+                int id_card = re_service.getReaderID(r_username);
+                
+                //khai báo các cột
+                LocalDate date1 = LocalDate.now();
+                LocalDate date2 = date1.plusYears(1);
+                
+                String d1 = date1.toString();
+                DateFormat f1 = new SimpleDateFormat("yyyy-MM-dd");
+                Date day_1 = f1.parse(d1);
+                java.sql.Date dd1 = new java.sql.Date(day_1.getTime());
+                
+                String d2 = date2.toString();
+                Date day_2 = f1.parse(d2);
+                java.sql.Date dd2 = new java.sql.Date(day_2.getTime());
+                float penalty = 0;
+                
+                Card card = new Card(id_card, true, dd1, dd2, penalty);
+                rd.create_Card(card);
+                
                 AlertUtils.showAlert("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION);
 //                SignUpController.init_Null(r_name, r_email, r_phone, r_add, r_username, r_pass, r_pass2);
 
