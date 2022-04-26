@@ -13,11 +13,11 @@
       <Pane layoutX="29.0" layoutY="57.0" prefHeight="368.0" prefWidth="242.0">
          <children>
             <Text layoutX="60.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Main" text="Phiếu nộp phạt" />
-            <Text layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mã mượn " />
+            <Text layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mã thẻ" />
             <Text layoutX="18.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Số ngày mượn" />
             <Text layoutX="19.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quá hạn" />
             <Text fill="#00e676" layoutX="19.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Tổng tiền" />
-            <TextField fx:id="txtBorrowId" disable="true" layoutX="107.0" layoutY="71.0" prefHeight="24.0" prefWidth="121.0" />
+            <TextField fx:id="txtBorrowId" layoutX="107.0" layoutY="71.0" onKeyPressed="#pressCardId" prefHeight="24.0" prefWidth="121.0" />
             <TextField fx:id="txtDays" disable="true" layoutX="107.0" layoutY="121.0" prefHeight="24.0" prefWidth="121.0" />
             <TextField fx:id="txtFineDays" disable="true" layoutX="107.0" layoutY="171.0" prefHeight="24.0" prefWidth="121.0" />
             <TextField fx:id="txtTotalMoney" disable="true" layoutX="107.0" layoutY="223.0" prefHeight="24.0" prefWidth="121.0" style="-fx-font-weight: bold;" styleClass="Money" />

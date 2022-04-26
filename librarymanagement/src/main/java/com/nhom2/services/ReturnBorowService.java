@@ -5,7 +5,7 @@
  */
 package com.nhom2.services;
 
-import com.nhom2.librarymanagement.PaymentController;
+
 import com.nhom2.pojo.BorrowBook;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
@@ -15,12 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.control.Alert;
 
 /**
  *
@@ -78,6 +76,23 @@ public class ReturnBorowService {
             return ls;
         }
     
+    }
+    
+    public String getEnd_date(String kw) throws SQLException, ParseException{
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        LocalDate l = LocalDate.now();
+        Date d = f.parse(l.toString());
+        String query = "SELECT end_date FROM borrowbook WHERE borrow_id = '"+kw+"'";
+        try (Connection conn = JdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareStatement(query);
+            rs = stm.executeQuery(query); 
+            String r = f.format(d) ;
+            while(rs.next()) {
+                r = rs.getString(1);
+            }
+                return r ;
+            
+        }
     }
     
     public String getStatus(String kw) throws SQLException{

@@ -131,6 +131,11 @@ public class BorrowBookController implements Initializable {
             } catch (SQLException ex) {
                 Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            try {
+                txtAmount.setText(r.getAmountBook(txtBook_id.getText()));
+            } catch (SQLException ex) {
+                Logger.getLogger(BorrowBookController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
     }

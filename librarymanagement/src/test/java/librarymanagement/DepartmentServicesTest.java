@@ -24,7 +24,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * @author phamt
  */
 public class DepartmentServicesTest {
-     private static Connection conn;
+    private static Connection conn;
      
     @BeforeAll
         public static void beforeAll() throws SQLException{

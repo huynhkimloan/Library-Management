@@ -13,7 +13,6 @@ module-info.class
 com\nhom2\librarymanagement\ReturnBookController.class
 com\nhom2\services\management\ReaderModify.class
 com\nhom2\librarymanagement\PaymentController.class
-com\nhom2\services\Payment.class
 com\nhom2\pojo\Book.class
 com\nhom2\pojo\BorrowBook.class
 com\nhom2\pojo\Department.class

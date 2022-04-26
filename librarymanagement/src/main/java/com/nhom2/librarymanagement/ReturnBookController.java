@@ -18,18 +18,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -83,7 +82,7 @@ public class ReturnBookController implements Initializable {
         });
         this.refreshTable();
         this.setCellValue();
-       
+        dpkEnd_date.setValue(LocalDate.now());
     }
         
     private void loadTableData(String kw) {
@@ -121,6 +120,7 @@ public class ReturnBookController implements Initializable {
     }
     
     private void setCellValue() {
+        ReturnBorowService r = new ReturnBorowService();
         tbData.setOnMouseClicked(e -> {
             dpkEnd_date.setValue(null);
             BorrowBook ls = tbData.getItems().get(tbData.getSelectionModel().getSelectedIndex());
@@ -138,6 +138,14 @@ public class ReturnBookController implements Initializable {
                 txtFine.setText(String.format("%.3f",ls.getFine()));
             }
             txtStatus.setText(String.valueOf(ls.getStatus()));
+            try {
+                dpkEnd_date.setValue((LocalDate.parse(r.getEnd_date(txtBorrow_id.getText()),
+                        DateTimeFormatter.ISO_LOCAL_DATE)));
+            } catch (SQLException ex) {
+                Logger.getLogger(ReturnBookController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ReturnBookController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
     }
@@ -160,9 +168,9 @@ public class ReturnBookController implements Initializable {
         loadTableData(null);
     }
     
+    
     @FXML
     private void restore() throws ParseException{
-        id = txtBorrow_id.getText();
         int fees = (int) (ReturnBorowService.daysDiff(dpkStart_date.getValue().toString(),
                 dpkEnd_date.getValue().toString()));
         if (fees < 0) {
@@ -197,6 +205,7 @@ public class ReturnBookController implements Initializable {
     
     @FXML
     private void addView(MouseEvent event) {
+        id = txtCard_id.getText();
         try {
             FXMLLoader p = new FXMLLoader(App.class.getResource("Payment.fxml"));
             Scene sc = new Scene(p.load());

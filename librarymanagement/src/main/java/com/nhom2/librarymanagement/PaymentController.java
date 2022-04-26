@@ -67,15 +67,15 @@ public class PaymentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-       fineMoney();
+        // TODO  
+        txtBorrowId.setText(ReturnBookController.getId());
+        fineMoney();
     } 
     
     public void fineMoney(){
-        txtBorrowId.setText(ReturnBookController.getId());
         String query = "SELECT r.reader_name, b.* FROM borrowbook b, reader r, "
                 + "card c WHERE b.card_id = c.card_id AND r.reader_id = c.card_id "
-                + "AND status = 1 AND borrow_id = '"+txtBorrowId.getText()+"'";
+                + "AND status = 1 AND c.card_id = '"+txtBorrowId.getText()+"'";
         try (Connection conn = JdbcUtils.getConn()){
             stm = conn.createStatement();
             rs = stm.executeQuery(query);
@@ -99,7 +99,7 @@ public class PaymentController implements Initializable {
     @FXML
     public void pay(MouseEvent event) {
         String query = "UPDATE borrowbook SET note = '"+txtNote.getText()+"',"
-              + "status = 0 WHERE borrow_id = '"+txtBorrowId.getText()+"'";
+              + "status = 0 WHERE card_id = '"+txtBorrowId.getText()+"'";
         
         if(txtGive.getText().equals("")) {
             Utils.getBox("Vui lòng nhập tiền thu", Alert.AlertType.WARNING).show();
@@ -107,7 +107,7 @@ public class PaymentController implements Initializable {
         else {
             try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement ps= conn.prepareStatement(query);
-            ps.execute();
+            ps.executeUpdate();
             Utils.getBox("Đã thanh toán thành công", Alert.AlertType.INFORMATION).show();
             Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             stage.close();
@@ -130,4 +130,13 @@ public class PaymentController implements Initializable {
             }
         }   
     }
+
+    @FXML
+    private void pressCardId(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            fineMoney();
+        }
+    }
+
+
 }

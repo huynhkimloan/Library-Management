@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nhom2.services;
+package com.nhom2.returnborrowpay;
 
 /**
  *
  * @author ASUS
  */
-public class Payment {
+public class paytest {
     
 }
