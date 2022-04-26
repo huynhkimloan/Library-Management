@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,5 +101,29 @@ public class BookModify {
         }
     }
     
+    public boolean kiemTraTrungViTri(String location) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "SELECT COUNT(*) FROM book WHERE location = ?";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, location);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                String kq = rs.getString(1);
+                if (kq.equals("0"))
+                    return true;
+            }
+            return false;
+        }
+    }
+    
+    public static long soSanhNgay(String d1, String d2) throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date1 = format.parse(d1);
+        java.util.Date date2 = format.parse(d2);
+        
+        int result = date1.compareTo(date2);
+        
+        return result;
+    }
 
 }

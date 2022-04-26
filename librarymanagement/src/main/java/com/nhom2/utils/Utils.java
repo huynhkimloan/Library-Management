@@ -45,6 +45,8 @@ public class Utils {
         return true;
     }
     
+    
+    /*Management*/
     public static int sntd (int m, int y){
 	switch (m)
 	{
@@ -57,7 +59,8 @@ public class Utils {
             default:
                     return 31;
 	}
-}
+    }
+    
     public static LocalDate getPreviousDay(String strDate, int d, int m, int y){
         d = Integer.parseInt(strDate.substring(8));
         m = Integer.parseInt(strDate.substring(5, 7));
@@ -74,5 +77,6 @@ public class Utils {
         LocalDate date = LocalDate.of(y, m, d);
         return date;
     }
+    
 }
 

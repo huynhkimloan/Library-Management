@@ -8,6 +8,7 @@ package com.nhom2.librarymanagement;
 import com.nhom2.pojo.Book;
 import com.nhom2.services.management.BookModify;
 import com.nhom2.utils.Utils;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -21,7 +22,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -32,6 +37,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -60,24 +67,18 @@ public class ManagementBookController implements Initializable {
         // TODO
         resetBook();
         DayLimit();
+        
         this.loadTableView();
-        try {
-            this.loadTableData(null);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManagementBookController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
     }    
     
     private void loadTableView(){
         TableColumn colId = new TableColumn("Mã");
         colId.setCellValueFactory(new PropertyValueFactory<>("book_id"));
-        colId.setPrefWidth(20);
+        colId.setPrefWidth(50);
         
         TableColumn colName = new TableColumn("Tên sách");
         colName.setCellValueFactory(new PropertyValueFactory<>("book_name"));
-        colName.setPrefWidth(235);
+        colName.setPrefWidth(250);
         
         TableColumn colDescription = new TableColumn("Mô tả");
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -93,15 +94,15 @@ public class ManagementBookController implements Initializable {
         
         TableColumn colPublishingCompany = new TableColumn("Nhà xuất bản");
         colPublishingCompany.setCellValueFactory(new PropertyValueFactory<>("publishing_company"));
-        colPublishingCompany.setPrefWidth(135);
+        colPublishingCompany.setPrefWidth(150);
         
         TableColumn colPublishingYear = new TableColumn("Năm XB");
         colPublishingYear.setCellValueFactory(new PropertyValueFactory<>("publishing_year"));
-        colPublishingYear.setPrefWidth(120);
+        colPublishingYear.setPrefWidth(150);
         
         TableColumn colImportDate = new TableColumn("Ngày nhập");
         colImportDate.setCellValueFactory(new PropertyValueFactory<>("import_date"));
-        colImportDate.setPrefWidth(120);
+        colImportDate.setPrefWidth(150);
         
         TableColumn colLocation = new TableColumn("Vị trí");
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -119,7 +120,11 @@ public class ManagementBookController implements Initializable {
     
     public void searchHandler(ActionEvent event){
         try {
-            this.loadTableData(this.txtBookName.getText());
+            String book_name = Utils.removeWhitespace(this.txtBookName.getText());
+            if (book_name == null || book_name.equals(""))
+                lbMess.setText("Phải nhập tên sách cần tìm!!");
+            else
+                this.loadTableData(this.txtBookName.getText());
         } catch (SQLException ex) {
             Logger.getLogger(ManagementBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,6 +163,7 @@ public class ManagementBookController implements Initializable {
     public void addHandler(ActionEvent event) throws SQLException, ParseException {
         try{
             SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");
+            BookModify bm = new BookModify();
 
             String book_name = Utils.removeWhitespace(this.txtBookName.getText());
             String description = Utils.removeWhitespace(this.txtDescription.getText());
@@ -176,6 +182,7 @@ public class ManagementBookController implements Initializable {
             
             String d1 = this.dtpPublishingYear.getValue().toString();
             String d2 = this.dtpImportDate.getValue().toString();
+            String d3 = LocalDate.now().toString();
             
             if (book_name == null || book_name.equals(""))
                 lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
@@ -183,17 +190,20 @@ public class ManagementBookController implements Initializable {
                 lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
             else if (author == null || author.equals(""))
                 lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
-            else if (soSanhNgay(d1, d2) > 0)
+            else if (BookModify.soSanhNgay(d1, d2) > 0)
                 lbMess.setText("Chọn lại!! Giá trị ngày nhập không được trước ngày XB sách!!!");
+            else if (BookModify.soSanhNgay(d1, d3) > 0)
+                lbMess.setText("Giá trị ngày xuất bản không hợp lệ!!");
+            else if (!bm.kiemTraTrungViTri(location)) 
+                lbMess.setText("Giá trị vị trí đã có!!");
             else {
                 Book b = new Book(book_name, description, publishing_company, import_date, location, publishing_year, category, author);
-                System.out.println( b);
-                BookModify bm = new BookModify();
                 bm.AddBook(b);
                 loadTableData(null);
                 Utils.getBox("Thêm thành công", Alert.AlertType.INFORMATION).show();
                 resetBook();
             }
+                     
         }catch (NumberFormatException ex2){
                 lbMess.setText("Bạn phải điền đủ các cột dữ liệu!!");
         }
@@ -204,6 +214,7 @@ public class ManagementBookController implements Initializable {
         if (b != null){
             try{
                 SimpleDateFormat f =new SimpleDateFormat("yyyy-MM-dd");
+                BookModify bm = new BookModify();
                 
                 int book_id = b.getBook_id();
                 String book_name = Utils.removeWhitespace(this.txtBookName.getText());
@@ -224,6 +235,7 @@ public class ManagementBookController implements Initializable {
                 
                 String d1 = this.dtpPublishingYear.getValue().toString();
                 String d2 = this.dtpImportDate.getValue().toString();
+                String d3 = LocalDate.now().toString();
 
                 if (book_name == null || book_name.equals(""))
                     lbMess.setText("Giá trị tên sách bắt buộc nhập!!");
@@ -231,10 +243,13 @@ public class ManagementBookController implements Initializable {
                     lbMess.setText("Giá trị loại sách bắt buộc nhập!!");
                 else if (author == null || author.equals(""))
                     lbMess.setText("Giá trị tên tác giả bắt buộc nhập!!");
-                else if (soSanhNgay(d1, d2) > 0)
+                else if (BookModify.soSanhNgay(d1, d2) > 0)
                     lbMess.setText("Chọn lại!! Giá trị ngày nhập không được trước ngày XB sách!!!");
+                else if (BookModify.soSanhNgay(d1, d3) > 0)
+                    lbMess.setText("Giá trị ngày xuất bản không hợp lệ!!");
+                else if (!bm.kiemTraTrungViTri(location)) 
+                    lbMess.setText("Giá trị vị trí đã có!!");
                 else {
-                    BookModify bm = new BookModify();
                     bm.UpdateBook(book_id, book_name, description, publishing_company, import_date, location, publishing_year, category, author);
                     loadTableData(null);      
                     Utils.getBox("Sửa thành công", Alert.AlertType.INFORMATION).show();
@@ -245,7 +260,7 @@ public class ManagementBookController implements Initializable {
             }
         }
         else
-            lbMess.setText("Chưa chọn đối tượng để sửa");
+            lbMess.setText("Chưa chọn đối tượng để sửa!!!");
     }
     
     public void deleteHandler(ActionEvent event) throws SQLException {
@@ -260,7 +275,7 @@ public class ManagementBookController implements Initializable {
             resetBook();
         }
         else
-            lbMess.setText("Chưa chọn đối tượng để xoá");
+            lbMess.setText("Chưa chọn đối tượng để xoá!!!");
     }
     
     private void resetBook(){
@@ -273,16 +288,26 @@ public class ManagementBookController implements Initializable {
         this.dtpPublishingYear.setValue(LocalDate.now());
         this.dtpImportDate.setValue(LocalDate.now());
         this.txtLocation.setText("");
+        
+        try {
+            this.loadTableData(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagementBookController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public static long soSanhNgay(String d1, String d2) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1 = format.parse(d1);
-        Date date2 = format.parse(d2);
-        
-        int result = date1.compareTo(date2);
-        
-        return result;
+    @FXML
+    private void btnExit (ActionEvent event) throws IOException{
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("LibrarianHome.fxml"));
+            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+           Logger.getLogger(LibrarianHomeController.class.getName()).log(Level.SEVERE, null, ex); 
+        }
     }
     
     private class MaxDateCell extends DateCell {
@@ -313,7 +338,6 @@ public class ManagementBookController implements Initializable {
             dtpPublishingYear.setValue(Utils.getPreviousDay(date, d, m, y));
             return new MaxDateCell(dayNow.valueProperty());
         });
-    }
-  
+    }  
 
 }

@@ -61,6 +61,7 @@ public class Reader {
         this.email = email;      
     }
 
+    /*ManagementReader*/
     public Reader(int reader_id, String reader_name,
                   String username, String password,
                   String sex, Date date_of_birth,

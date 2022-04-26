@@ -8,20 +8,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" styleClass="ManagementReader" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.ManagementReaderController">
-   <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title-managementreader" text="Quản lý Độc giả" wrappingWidth="278.99720764160156" BorderPane.alignment="CENTER" />
-   </top>
    <left>
       <VBox prefHeight="603.0" prefWidth="578.0" styleClass="ManagementReader" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="43.0" prefWidth="786.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Họ và tên:" wrappingWidth="204.22695922851562" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Họ và tên:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtName" promptText="Nhập họ và tên..." styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
@@ -31,19 +29,19 @@
             </HBox>
             <HBox prefHeight="47.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Ngày sinh:" wrappingWidth="204.22695922851562" />
-                  <DatePicker fx:id="dtpBirthDate" accessibleRole="TEXT_FIELD" promptText="Chọn ngày sinh..." styleClass="txt-managementreader" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Ngày sinh:" wrappingWidth="204.22695922851562" />
+                  <DatePicker fx:id="dtpBirthDate" accessibleRole="TEXT_FIELD" prefHeight="42.0" prefWidth="334.0" promptText="Chọn ngày sinh..." styleClass="txt-managementreader" />
                </children>
             </HBox>
             <HBox prefHeight="53.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Giới tính:" wrappingWidth="204.22695922851562" />
-                  <ComboBox fx:id="cbSex" prefWidth="150.0" styleClass="txt-managementreader" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Giới tính:" wrappingWidth="204.22695922851562" />
+                  <ComboBox fx:id="cbSex" prefHeight="48.0" prefWidth="354.0" styleClass="txt-managementreader" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Email:" wrappingWidth="204.22695922851562" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Email:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtEmail" promptText="Nhập email..." styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
@@ -53,7 +51,7 @@
             </HBox>
             <HBox prefHeight="47.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Địa chỉ:" wrappingWidth="204.22695922851562" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Địa chỉ:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtAddress" promptText="Nhập địa chỉ..." styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
@@ -63,7 +61,7 @@
             </HBox>
             <HBox prefHeight="48.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Số điện thoại:" wrappingWidth="204.22695922851562" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Số điện thoại:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtPhone" promptText="Nhập số điện thoại..." styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
@@ -73,19 +71,19 @@
             </HBox>
             <HBox prefHeight="50.0" prefWidth="558.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Đối tượng: " wrappingWidth="204.22695922851562" />
-                  <ComboBox fx:id="cbObject" prefWidth="150.0" styleClass="txt-managementreader" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Đối tượng: " wrappingWidth="204.22695922851562" />
+                  <ComboBox fx:id="cbObject" prefHeight="45.0" prefWidth="354.0" styleClass="txt-managementreader" />
                </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="417.0" prefHeight="50.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Bộ phận:" wrappingWidth="204.22695922851562" />
-                  <ComboBox fx:id="cbDepartment" prefWidth="150.0" styleClass="txt-managementreader" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Bộ phận:" wrappingWidth="204.22695922851562" />
+                  <ComboBox fx:id="cbDepartment" prefHeight="42.0" prefWidth="354.0" styleClass="txt-managementreader" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Tên tài khoản:" wrappingWidth="204.22695922851562" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Tên tài khoản:" wrappingWidth="204.22695922851562" />
                   <TextField fx:id="txtUsername" promptText="Username..." styleClass="txt-managementreader">
                      <font>
                         <Font size="9.0" />
@@ -95,8 +93,8 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="187.0" prefHeight="49.0" prefWidth="558.0" styleClass="hbox-manabook">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementbook" text="Ngày kích hoạt thẻ:" wrappingWidth="204.22695922851562" />
-                  <DatePicker fx:id="dtpActivationDate" accessibleRole="TEXT_FIELD" editable="false" prefHeight="32.0" prefWidth="614.0" promptText="Ngày kích hoạt thẻ" styleClass="txt-managementreader" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-managementreader" text="Ngày kích hoạt thẻ:" wrappingWidth="204.22695922851562" />
+                  <DatePicker fx:id="dtpActivationDate" accessibleRole="TEXT_FIELD" editable="false" prefHeight="54.0" prefWidth="354.0" promptText="Ngày kích hoạt thẻ" styleClass="txt-managementreader" />
                </children>
             </HBox>
          </children>
@@ -105,18 +103,26 @@
    <center>
       <VBox accessibleRole="TEXT_FIELD" prefHeight="653.0" prefWidth="901.0" styleClass="ManagementBook" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lbMess" styleClass="lbMess" />
+            <Label fx:id="lbMess" style="-fx-font-style: italic;" styleClass="lbMess" />
             <HBox prefHeight="57.0" prefWidth="881.0" styleClass="hbox-manabook">
                <children>
                   <Button mnemonicParsing="false" onAction="#searchReaderHandler" styleClass="btn-managementbook" text="TÌM KIẾM" />
                   <Button mnemonicParsing="false" onAction="#editReaderHandler" styleClass="btn-managementbook" text="SỬA" />
                   <Button mnemonicParsing="false" onAction="#deleteReaderHandler" styleClass="btn-managementbook" text="XÓA" />
                   <Button mnemonicParsing="false" onAction="#resetReaderHandler" prefHeight="43.0" prefWidth="248.0" styleClass="btn-managementbook" text="THIẾT LẬP LẠI" />
-                  <Button layoutX="641.0" layoutY="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="248.0" styleClass="btn-managementbook" text="QUAY LẠI" />
+                  <Button layoutX="641.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnExit" prefHeight="43.0" prefWidth="248.0" styleClass="btn-managementbook" text="QUAY LẠI" />
                </children>
             </HBox>
             <TableView id="tbReaders" fx:id="tbReaders" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#handleClickTableViewReader" prefHeight="450.0" prefWidth="881.0" />
          </children>
       </VBox>
    </center>
+   <top>
+      <VBox prefHeight="75.0" prefWidth="1480.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: CENTER;" styleClass="title-managementreader" text="Quản lý Độc giả" wrappingWidth="1478.1973447799683" />
+            <Pane prefHeight="5.0" prefWidth="200.0" style="-fx-background-color: green;" />
+         </children>
+      </VBox>
+   </top>
 </BorderPane>
