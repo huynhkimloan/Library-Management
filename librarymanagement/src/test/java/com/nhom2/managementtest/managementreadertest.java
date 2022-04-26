@@ -5,25 +5,22 @@
  */
 package com.nhom2.managementtest;
 
+import com.nhom2.services.management.ReaderModify;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 /**
  *
  * @author LENOVO
  */
 public class managementreadertest {
     private static Connection conn;
+    ReaderModify rds = new ReaderModify();
     
     @BeforeAll
     public static void beforeAll() throws SQLException{
@@ -36,20 +33,9 @@ public class managementreadertest {
             conn.close();
     }
     
-    @Test
-    public static void testUsernameUnique() throws SQLException{
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM reader");
-        
-        List<String> kq = new ArrayList<>();
-        while (rs.next()) {
-            String location = rs.getString("username");
-            kq.add(location);
-        }
-        
-        Set<String> kq2 = new HashSet<>(kq);
-
-        Assertions.assertEquals(kq.size(), kq2.size());
-        
+    @ParameterizedTest
+    @CsvSource({"ngan07, true","ngan, false"})
+    public void kiemTraTrungUsernameTest(String username, boolean expected) throws SQLException{
+        Assertions.assertEquals(expected, rds.kiemTraTrungUsername(username));
     }
 }

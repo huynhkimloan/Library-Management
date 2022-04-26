@@ -100,6 +100,19 @@ public class ReaderModify {
         }
     }
     
-    
+    public boolean kiemTraTrungUsername(String username) throws SQLException{
+        try(Connection conn = JdbcUtils.getConn()){
+            String sql = "SELECT COUNT(*) FROM reader WHERE username = ? ";
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                String kq = rs.getString(1);
+                if (kq.equals("0"))
+                    return true;
+            }
+            return false;
+        }
+    }
 
 }

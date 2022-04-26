@@ -6,19 +6,16 @@
         
 package com.nhom2.managementtest;
 
+import com.nhom2.services.management.BookModify;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 
 /**
@@ -27,6 +24,7 @@ import org.junit.jupiter.api.Assertions;
  */
 public class managementbooktest {
     private static Connection conn;
+    BookModify bm = new BookModify();
     
     @BeforeAll
     public static void beforeAll() throws SQLException{
@@ -39,21 +37,18 @@ public class managementbooktest {
             conn.close();
     }
     
-    @Test
-    public static void testLocationUnique() throws SQLException{
-        Statement stm = conn.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM book");
-        
-        List<String> kq = new ArrayList<>();
-        while (rs.next()) {
-            String location = rs.getString("location");
-            kq.add(location);
-        }
-        
-        Set<String> kq2 = new HashSet<>(kq);
-
-        Assertions.assertEquals(kq.size(), kq2.size());        
+    @ParameterizedTest
+    @CsvSource({"K19, true","K11, false"})
+    public void kiemTraTrungViTriTest(String location, boolean expected) throws SQLException{
+        Assertions.assertEquals(expected, bm.kiemTraTrungViTri(location));
     }
-
+    
+    @ParameterizedTest
+    @CsvSource({"2019-04-26, 2022-04-24, true","2021-04-26, 2019-04-24, false"})
+    public void soSanhNXB_NNTest(String publishing_year, String import_date, boolean expected) throws SQLException, ParseException{
+        Assertions.assertEquals(expected, BookModify.soSanhNgay(publishing_year, import_date));
+    }
+    
+    
 
 }
