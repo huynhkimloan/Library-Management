@@ -105,7 +105,7 @@ public class Signin_upController implements Initializable {
 //                readerID = rd.getReaderID(this.username.getText());
 //                adminID = 0;
                 //qua scene ...
-                Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("ReaderHome.fxml"));
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
@@ -125,8 +125,7 @@ public class Signin_upController implements Initializable {
 //                readerID = rd.getReaderID(this.username.getText());
 //                adminID = 0;
                 //qua scene Quản lý 
-                //chỗ này t để sang 1 trong 2 cái Management không được nên để tạm primary
-                Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("LibrarianHome.fxml"));
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
