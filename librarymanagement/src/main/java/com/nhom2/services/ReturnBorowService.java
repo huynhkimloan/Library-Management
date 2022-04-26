@@ -47,18 +47,6 @@ public class ReturnBorowService {
     
     }
     
-    public static long daysDiff(String d1, String d2) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date1;
-        Date date2;
-        date1 = simpleDateFormat.parse(d1);
-        date2 = simpleDateFormat.parse(d2);
-
-        long result = (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
-       
-        return result;
-    }
-    
     public List<BorrowBook> getBorrow(String kw) throws SQLException{
         String query = "SELECT * FROM borrowbook WHERE status = 1";
         try (Connection conn = JdbcUtils.getConn()){
@@ -172,6 +160,7 @@ public class ReturnBorowService {
         
         return Math.abs(give - remain);
     }
+   
     
     public void updateAmountBook(int newValue, String kw) throws SQLException {
         String query = "UPDATE book SET amount = '"+newValue+"'  WHERE book_id = '" +kw+ "'";
@@ -179,6 +168,26 @@ public class ReturnBorowService {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
         } 
+    }
+    
+    public static long daysDiff(String d1, String d2) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1;
+        Date date2;
+        date1 = simpleDateFormat.parse(d1);
+        date2 = simpleDateFormat.parse(d2);
+
+        long result = (date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000);
+       
+        return result;
+    }
+    
+    //
+    public Boolean daysDiffTest(String d1, String d2) throws ParseException {
+        if(daysDiff(d1, d2) >= 0)
+            return true;
+        else
+            return false;
     }
     
 }
