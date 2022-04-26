@@ -78,6 +78,14 @@ public class Book {
         this.select = new CheckBox();
         this.select.setDisable(true);
     }
+    
+    
+    public Book(int book_id, String book_name, boolean active) {
+        this.book_id = book_id;
+        this.book_name = book_name;
+        this.active = active;
+        
+    }
 
     @Override
     public String toString() {

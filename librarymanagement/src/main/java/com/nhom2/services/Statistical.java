@@ -8,10 +8,13 @@ package com.nhom2.services;
 import com.nhom2.pojo.Reader;
 import com.nhom2.utils.JdbcUtils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -296,6 +299,22 @@ public class Statistical {
             return kq2;
         }
         return kq2 ="Qúy 4 Năm " + year + " độc giả không mượn sách" ;
+    }
+    //kiểm tra số điện thoại hợp lệ
+    public boolean check_Nam(String p) {
+        if (p.length() != 4 )
+            return false;
+        return true;
+    }
+    // Kiểm tra năm có hợp lệ không
+    public boolean check_NamHLe(String p) {
+        String a = p;
+        LocalDate localDate = LocalDate.now();
+        int year = localDate.getYear();
+        int i = Integer.parseInt(a);
+        if(i > year || i <1970)
+            return false;      
+        return true;
     }
     
 }

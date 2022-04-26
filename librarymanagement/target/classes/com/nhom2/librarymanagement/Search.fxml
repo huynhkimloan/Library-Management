@@ -107,7 +107,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Button mnemonicParsing="false" styleClass="btnReserve" text="Đặt sách">
+      <Button mnemonicParsing="false" onAction="#datSachHandler" styleClass="btnReserve" text="Đặt sách">
          <VBox.margin>
             <Insets left="620.0" top="5.0" />
          </VBox.margin>
