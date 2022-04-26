@@ -56,9 +56,8 @@ public class ReserveBook {
     /**
      * @return the activation_date
      */
-    public String getActivation_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(activation_date);
+    public Date getActivation_date() {
+        return activation_date;
     }
 
     /**
@@ -71,9 +70,8 @@ public class ReserveBook {
     /**
      * @return the expiration_date
      */
-    public String getExpiration_date() {
-        SimpleDateFormat f =new SimpleDateFormat ("dd-MM-yyyy");
-        return f.format(expiration_date);
+    public Date getExpiration_date() {
+        return expiration_date;
     }
 
     /**
@@ -124,9 +122,4 @@ public class ReserveBook {
     public void setCard_id(int card_id) {
         this.card_id = card_id;
     }
-
-    /**
-     * @return the reserve_id
-     */
 }
-

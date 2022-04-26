@@ -6,32 +6,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="324.0" prefWidth="326.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.LibrarianHomeController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="350.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom2.librarymanagement.LibrarianHomeController">
    <children>
-      <VBox layoutX="-2.0" prefHeight="331.0" prefWidth="328.0" style="-fx-background-color: lightcyan;">
+      <VBox layoutX="-2.0" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: lightcyan;">
          <children>
             <Pane prefHeight="88.0" prefWidth="328.0">
                <children>
-                  <Text layoutX="48.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="Librarian Home" />
+                  <Text layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: CENTER;" styleClass="Subject" text="Librarian Home" wrappingWidth="350.0" />
                </children>
             </Pane>
-            <Button mnemonicParsing="false" onMouseClicked="#pageBorrow" prefHeight="41.0" prefWidth="340.0" style="-fx-background-color: white; -fx-font-size: 18;" text="Mượn sách">
+            <Button mnemonicParsing="false" onMouseClicked="#pageBorrow" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: white; -fx-font-size: 18;" text="Mượn sách">
                <graphic>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onMouseClicked="#pageReturn" prefHeight="41.0" prefWidth="338.0" style="-fx-background-color: lightblue; -fx-font-size: 18;" text="Trả sách">
+            <Button mnemonicParsing="false" onMouseClicked="#pageReturn" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: lightblue; -fx-font-size: 18;" text="Trả sách">
                <graphic>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#pageManagementReader" prefHeight="41.0" prefWidth="333.0" style="-fx-background-color: lightgreen; -fx-font-size: 18;" text="Quản lý Độc giả">
+            <Button layoutX="10.0" layoutY="258.0" mnemonicParsing="false" onAction="#pagePayment" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: lightpink; -fx-font-size: 18;" text="Thanh toán tiền phạt" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#pageReserveDetails" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: lightgreen; -fx-font-size: 18;" text="Chi tiết đặt sách" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#pageStatistical" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: white; -fx-font-size: 18;" text="Thống kê" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#pageManagementReader" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: lightblue; -fx-font-size: 18;" text="Quản lý Độc giả">
                <graphic>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#pageManagementBook" prefHeight="41.0" prefWidth="333.0" style="-fx-background-color: lightpink; -fx-font-size: 18;" text="Quản lý Sách">
+            <Button mnemonicParsing="false" onAction="#pageManagementBook" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: lightpink; -fx-font-size: 18;" text="Quản lý Sách">
                <graphic>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#btnExit" prefHeight="41.0" prefWidth="333.0" style="-fx-background-color: bisque; -fx-font-size: 18;" text="Thoát">
+            <Button mnemonicParsing="false" onAction="#btnExit" prefHeight="40.0" prefWidth="450.0" style="-fx-background-color: bisque; -fx-font-size: 18;" text="Thoát">
                <graphic>
                </graphic>
             </Button>
